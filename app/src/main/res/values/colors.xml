@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#121212</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="mainButtonsColor">#121212</color>
+    <color name="backgroundColor">#0D0C0C</color>
+    <color name="buttonTextColor">#E0FFFF</color>
+    <color name="operatorsButtonsColor">#361705</color>
+    <color name="equalButtonColor">#031B01</color>
+    <color name="cButtonColor">#290404</color>
+    <color name="displayTextColor">#E0FFFF</color>
+    <color name="historyDisplayTextColor">#665757</color>
+</resources>
