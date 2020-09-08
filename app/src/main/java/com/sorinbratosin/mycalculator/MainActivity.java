@@ -5,14 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private String input;
     private float result;
     private String historyDisplay;
+    private boolean firstPress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             case "C":
                 input = "0";
                 historyDisplay = "";
+                firstPress = false;
                 break;
             case "⌫":
                 String theTextMinusOneChar = input.substring(0,input.length()-1);
@@ -65,10 +65,14 @@ public class MainActivity extends AppCompatActivity {
                 if(data.equals("+") || data.equals("-") || data.equals("*") || data.equals("÷")) {
                     calculate();
                 }
-                if(input.equals("0")) {
-                    input = data;
-                    historyDisplay = data;
-                } else {
+                if(input.equals("0") && !firstPress) {
+                        input = data;
+                        historyDisplay = data;
+                } else if(input.equals("0")) {
+                        input += data;
+                        historyDisplay += data;
+                }
+                else {
                     input += data;
                     historyDisplay += data;
                 }
@@ -78,81 +82,86 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calculate() {
+        firstPress = true;
         String[] stringCheck = input.split("(?<=[-+*÷])|(?=[-+*÷])");
-        if (stringCheck.length == 3) {
-            switch (stringCheck[1]) {
+        List<String> stringCheckList = new LinkedList<>(Arrays.asList(stringCheck));
+        if(stringCheck[0].equals("")) {
+            stringCheckList.remove(0);
+        }
+        if (stringCheckList.size() == 3) {
+            switch (stringCheckList.get(1)) {
                 case "*":
-                    result = Float.parseFloat(stringCheck[0]) * Float.parseFloat(stringCheck[2]);
+                    result = Float.parseFloat(stringCheckList.get(0)) * Float.parseFloat(stringCheckList.get(2));
                     checkIfDecimalNeeded();
                     break;
                 case "÷":
-                    result = Float.parseFloat(stringCheck[0]) / Float.parseFloat(stringCheck[2]);
+                    result = Float.parseFloat(stringCheckList.get(0)) / Float.parseFloat(stringCheckList.get(2));
                     checkIfDecimalNeeded();
                     break;
                 case "+":
-                    result = Float.parseFloat(stringCheck[0]) + Float.parseFloat(stringCheck[2]);
+                    result = Float.parseFloat(stringCheckList.get(0)) + Float.parseFloat(stringCheckList.get(2));
                     checkIfDecimalNeeded();
                     break;
                 case "-":
-                    result = Float.parseFloat(stringCheck[0]) - Float.parseFloat(stringCheck[2]);
+                    result = Float.parseFloat(stringCheckList.get(0)) - Float.parseFloat(stringCheckList.get(2));
                     checkIfDecimalNeeded();
                     break;
             }
         }
-        if (stringCheck.length == 4 && stringCheck[0].equals("-")) {
-            switch (stringCheck[2]) {
+        if (stringCheckList.size() == 4 && stringCheckList.get(0).equals("-")) {
+            switch (stringCheckList.get(2)) {
                 case "*":
-                    result = -Float.parseFloat(stringCheck[1]) * Float.parseFloat(stringCheck[3]);
+                    result = -Float.parseFloat(stringCheckList.get(1)) * Float.parseFloat(stringCheckList.get(3));
                     checkIfDecimalNeeded();
                     break;
                 case "÷":
-                    result = -Float.parseFloat(stringCheck[1]) / Float.parseFloat(stringCheck[3]);
+                    result = -Float.parseFloat(stringCheckList.get(1)) / Float.parseFloat(stringCheckList.get(3));
                     checkIfDecimalNeeded();
                     break;
                 case "+":
-                    result = -Float.parseFloat(stringCheck[1]) + Float.parseFloat(stringCheck[3]);
+                    result = -Float.parseFloat(stringCheckList.get(1)) + Float.parseFloat(stringCheckList.get(3));
                     checkIfDecimalNeeded();
                     break;
                 case "-":
-                    result = -Float.parseFloat(stringCheck[1]) - Float.parseFloat(stringCheck[3]);
+                    result = -Float.parseFloat(stringCheckList.get(1)) - Float.parseFloat(stringCheckList.get(3));
                     checkIfDecimalNeeded();
                     break;
             }
-        } else if (stringCheck.length == 4) {
-            switch (stringCheck[1]) {
+        } else if (stringCheckList.size() == 4) {
+            switch (stringCheckList.get(1)) {
                 case "*":
-                    result = Float.parseFloat(stringCheck[0]) * -Float.parseFloat(stringCheck[3]);
+                    result = Float.parseFloat(stringCheckList.get(0)) * -Float.parseFloat(stringCheckList.get(3));
                     checkIfDecimalNeeded();
                     break;
                 case "÷":
-                    result = Float.parseFloat(stringCheck[0]) / -Float.parseFloat(stringCheck[3]);
+                    result = Float.parseFloat(stringCheckList.get(0)) / -Float.parseFloat(stringCheckList.get(3));
                     checkIfDecimalNeeded();
                     break;
                 case "+":
-                    result = Float.parseFloat(stringCheck[0]) + -Float.parseFloat(stringCheck[3]);
+                    result = Float.parseFloat(stringCheckList.get(0)) + -Float.parseFloat(stringCheckList.get(3));
                     checkIfDecimalNeeded();
                     break;
                 case "-":
-                    result = Float.parseFloat(stringCheck[0]) - -Float.parseFloat(stringCheck[3]);
+                    result = Float.parseFloat(stringCheckList.get(0)) - -Float.parseFloat(stringCheckList.get(3));
                     checkIfDecimalNeeded();
                     break;
             }
-        } else if (stringCheck.length == 5) {
-            switch (stringCheck[3]) {
+        } else if (stringCheckList.size() == 5) {
+            switch (stringCheckList.get(2)) {
                 case "*":
-                    result = -Float.parseFloat(stringCheck[1]) * -Float.parseFloat(stringCheck[4]);
+                    result = -Float.parseFloat(stringCheckList.get(1)) * -Float.parseFloat(stringCheckList.get(4));
                     checkIfDecimalNeeded();
                     break;
                 case "÷":
-                    result = -Float.parseFloat(stringCheck[1]) / -Float.parseFloat(stringCheck[4]);
+                    result = -Float.parseFloat(stringCheckList.get(1)) / -Float.parseFloat(stringCheckList.get(4));
                     checkIfDecimalNeeded();
                     break;
                 case "+":
-                    result = -Float.parseFloat(stringCheck[1]) + -Float.parseFloat(stringCheck[4]);
+                    result = -Float.parseFloat(stringCheckList.get(1)) + -Float.parseFloat(stringCheckList.get(4));
                     checkIfDecimalNeeded();
                     break;
                 case "-":
-                    result = -Float.parseFloat(stringCheck[1]) - -Float.parseFloat(stringCheck[4]);
+                    result = -Float.parseFloat(stringCheckList.get(1)) - -Float.parseFloat(stringCheckList.get(4));
                     checkIfDecimalNeeded();
                     break;
             }
