@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     case "÷":
                         result = -Float.parseFloat(stringCheckList.get(1)) / Float.parseFloat(stringCheckList.get(3));
                         checkIfDecimalNeeded();
+                        checkDivideByZero();
                         break;
                     case "+":
                         result = -Float.parseFloat(stringCheckList.get(1)) + Float.parseFloat(stringCheckList.get(3));
@@ -165,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                     case "÷":
                         result = Float.parseFloat(stringCheckList.get(0)) / -Float.parseFloat(stringCheckList.get(3));
                         checkIfDecimalNeeded();
+                        checkDivideByZero();
                         break;
                     case "+":
                         result = Float.parseFloat(stringCheckList.get(0)) + -Float.parseFloat(stringCheckList.get(3));
@@ -184,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                     case "÷":
                         result = -Float.parseFloat(stringCheckList.get(1)) / -Float.parseFloat(stringCheckList.get(4));
                         checkIfDecimalNeeded();
+                        checkDivideByZero();
                         break;
                     case "+":
                         result = -Float.parseFloat(stringCheckList.get(1)) + -Float.parseFloat(stringCheckList.get(4));
