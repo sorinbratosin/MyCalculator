@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VatCalculator"
+    android:background="@color/backgroundColor">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Enter a Vat Rate below"
+        android:textAlignment="center"
+        android:textColor="@color/displayTextColor"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="625dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:focusableInTouchMode="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/vatRateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/displayTextColor"
+            android:textSize="20sp"
+            android:text="@string/vatRateTextView" />
+
+        <EditText
+            android:id="@+id/vatRateEditTextNumbers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textColor="@color/displayTextColor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/amountWithoutVatTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/amountWithoutVatTextView"
+            android:layout_marginTop="15dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/displayTextColor"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/amountWithoutVatEditTextNumbers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textColor="@color/displayTextColor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/vatTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vatTextView2"
+            android:layout_marginTop="15dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/displayTextColor"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/vatEditTextNumbers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textColor="@color/displayTextColor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/totalTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/totalTextView"
+            android:layout_marginTop="15dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/displayTextColor"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/totalEditTextNumbers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textColor="@color/displayTextColor"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
