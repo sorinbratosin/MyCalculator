@@ -19,4 +19,12 @@
     <string name="zero_button">0</string>
     <string name="dot_button">.</string>
     <string name="equal_button">=</string>
+    <string name="chooseTextView">Choose an activity</string>
+    <string name="standardCalcTextView">Standard Calculator</string>
+    <string name="vatTextView">VAT Calculator</string>
+    <string name="percentageSplitTextView">Percentage Split</string>
+    <string name="vatRateTextView">VAT Rate</string>
+    <string name="amountWithoutVatTextView">Amount without VAT</string>
+    <string name="vatTextView2">VAT</string>
+    <string name="totalTextView">Total</string>
 </resources>
