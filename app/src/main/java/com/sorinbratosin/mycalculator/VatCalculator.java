@@ -8,13 +8,14 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import java.text.DecimalFormat;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class VatCalculator extends AppCompatActivity {
 
     private EditText VatRate,AmountWithoutVat,Vat,Total;
-    private double vatRateDouble,amountWithoutVatDouble,vatDouble,totalDouble,vatRateForAmountWithoutVatConvertedForOperations,vatRateForTotalConvertedForOperations;
+    private double vatRateDouble,vatRateForAmountWithoutVatConvertedForOperations,vatRateForTotalConvertedForOperations;
     String vatRateString, resultWithTwoDecimalsMax;
     boolean editTextsEmpty,vatRateEmpty;
 
@@ -33,8 +34,9 @@ public class VatCalculator extends AppCompatActivity {
         Total = (EditText) findViewById(R.id.totalEditTextNumbers);
     }
 
+    //sets the rate for operations using Total to 1.0xx for VAT < 10 or 1.xxx for VAT >= 10
+    //sets the rate for operations using AmountWithoutVat to 0.0xx for VAT < 10 or 0.xxx for VAT >= 10
     private void setVatRate() {
-        //set the convertedVatRate 1.0xx for VAT <= 10 or 1.xxx for VAT > 10 =?without dot for future operations
             vatRateDouble = Double.parseDouble(String.valueOf(VatRate.getText()));
             String [] vatRateWithoutDot = String.valueOf(VatRate.getText()).split("\\.");
             if(vatRateWithoutDot.length == 1) {
@@ -59,7 +61,7 @@ public class VatCalculator extends AppCompatActivity {
 
             }
         }
-
+        //Listeners for All EditTexts that update as the user types using the one you're typing into to update the others
         private void editTextListeners() {
         AmountWithoutVat.addTextChangedListener(new TextWatcher() {
             @Override
@@ -133,10 +135,8 @@ public class VatCalculator extends AppCompatActivity {
         });
         }
 
-
-
+    //calculate the VAT and Total using AmountWithoutVat and VatRate
     private void calculateUsingAmountWithoutVat() {
-        //calculate the VAT and Total
         String amountWithoutVatString = String.valueOf(AmountWithoutVat.getText());
         VatRateIsEmpty();
         if(amountWithoutVatString.equals("")) {
@@ -145,20 +145,25 @@ public class VatCalculator extends AppCompatActivity {
             Total.setText(empty);
         } else if (!vatRateEmpty) {
             setVatRate();
-            amountWithoutVatDouble = Double.parseDouble(String.valueOf(AmountWithoutVat.getText()));
-            vatDouble = amountWithoutVatDouble * vatRateForAmountWithoutVatConvertedForOperations;
-            checkIfDecimalNeeded(vatDouble);
-            Vat.setText(resultWithTwoDecimalsMax);
-            totalDouble = amountWithoutVatDouble + vatDouble;
-            checkIfDecimalNeeded(totalDouble);
-            Total.setText(resultWithTwoDecimalsMax);
+
+            BigDecimal amountWithoutVatBD = new BigDecimal(String.valueOf(AmountWithoutVat.getText()));
+            BigDecimal vatRateForAmountWithoutVatConvertedForOperationsBD = new BigDecimal(Double.toString(vatRateForAmountWithoutVatConvertedForOperations));
+            BigDecimal vatBD;
+            vatBD = amountWithoutVatBD.multiply(vatRateForAmountWithoutVatConvertedForOperationsBD);
+            vatBD = vatBD.setScale(2, BigDecimal.ROUND_HALF_UP);
+
+            Vat.setText(checkIfDecimalNeeded(vatBD));
+            BigDecimal totalBD;
+            totalBD = amountWithoutVatBD.add(vatBD);
+            totalBD = totalBD.setScale(2, BigDecimal.ROUND_HALF_UP);
+            Total.setText(checkIfDecimalNeeded(totalBD));
+
         } else {
             alertCompleteVatRate();
         }
     }
-
+    // calculate AmountWithoutVat and Total using only the Vat and VatRate
     private void calculateUsingVat() {
-        // calculate AmountWithoutVat and Total
         String vatString = String.valueOf(Vat.getText());
         VatRateIsEmpty();
         if(vatString.equals("")) {
@@ -167,20 +172,25 @@ public class VatCalculator extends AppCompatActivity {
             Total.setText(empty);
         } else if (!vatRateEmpty) {
             setVatRate();
-            vatDouble = Double.parseDouble(String.valueOf(Vat.getText()));
-            amountWithoutVatDouble = 100 / vatRateDouble * vatDouble;
-            checkIfDecimalNeeded(amountWithoutVatDouble);
-            AmountWithoutVat.setText(resultWithTwoDecimalsMax);
-            totalDouble = amountWithoutVatDouble + vatDouble;
-            checkIfDecimalNeeded(totalDouble);
-            Total.setText(resultWithTwoDecimalsMax);
+
+            BigDecimal vatBD = new BigDecimal(String.valueOf(Vat.getText()));
+            BigDecimal vatRateBD = new BigDecimal(String.valueOf(vatRateDouble));
+            BigDecimal amountWithoutVatBD;
+            BigDecimal oneHundred = new BigDecimal("100");
+            amountWithoutVatBD = oneHundred.divide(vatRateBD,2, RoundingMode.HALF_UP).multiply(vatBD);
+            AmountWithoutVat.setText(checkIfDecimalNeeded(amountWithoutVatBD));
+
+            BigDecimal totalBD;
+            totalBD = amountWithoutVatBD.add(vatBD);
+            totalBD = totalBD.setScale(2, BigDecimal.ROUND_HALF_UP);
+            Total.setText(checkIfDecimalNeeded(totalBD));
+
         } else  {
             alertCompleteVatRate();
         }
     }
-
+    //calculate AmountWithoutVat and VAT using the Total and VatRate
     private void calculateUsingTotal() {
-        //calculate AmountWithoutVat and VAT
         String totalString = String.valueOf(Total.getText());
         VatRateIsEmpty();
         if(totalString.equals("")) {
@@ -189,18 +199,23 @@ public class VatCalculator extends AppCompatActivity {
             Vat.setText(empty);
         } else if (!vatRateEmpty){
             setVatRate();
-            totalDouble = Double.parseDouble(String.valueOf(Total.getText()));
-            amountWithoutVatDouble = totalDouble / vatRateForTotalConvertedForOperations;
-            checkIfDecimalNeeded(amountWithoutVatDouble);
-            AmountWithoutVat.setText(resultWithTwoDecimalsMax);
-            vatDouble = totalDouble - amountWithoutVatDouble;
-            checkIfDecimalNeeded(vatDouble);
-            Vat.setText(resultWithTwoDecimalsMax);
+
+            BigDecimal totalBD = new BigDecimal(String.valueOf(Total.getText()));
+            BigDecimal amountWithoutVatBD;
+            BigDecimal vatRateForTotalConvertedForOperationsBD = new BigDecimal(String.valueOf(vatRateForTotalConvertedForOperations));
+            amountWithoutVatBD = totalBD.divide(vatRateForTotalConvertedForOperationsBD,2, RoundingMode.HALF_UP);
+            AmountWithoutVat.setText(checkIfDecimalNeeded(amountWithoutVatBD));
+
+            BigDecimal vatBD;
+            vatBD = totalBD.subtract(amountWithoutVatBD);
+            vatBD = vatBD.setScale(2, BigDecimal.ROUND_HALF_UP);
+            Vat.setText(checkIfDecimalNeeded(vatBD));
+
         } else {
             alertCompleteVatRate();
         }
     }
-
+    //checks if EditTexts(except VatRate) are empty
     private void checkIfEditTextsAreEmpty() {
         String amountWithoutVatString = String.valueOf(AmountWithoutVat.getText());
         String vatString = String.valueOf(Vat.getText());
@@ -211,25 +226,17 @@ public class VatCalculator extends AppCompatActivity {
             editTextsEmpty = false;
         }
     }
-
-    private void checkIfDecimalNeeded(double toBeChecked) {
-        String resultToString = Double.toString(toBeChecked);
-        String[] resultToBeChecked = resultToString.split("(?<=\\.)|(?=\\.)");
-        if (resultToBeChecked.length == 3) {
-            if (resultToBeChecked[2].equals("0")) {
-                int intResult = Integer.parseInt(resultToBeChecked[0]);
-                resultWithTwoDecimalsMax = intResult + "";
-            } else {
-                char[] decimals = resultToBeChecked[2].toCharArray();
-                if(decimals.length <= 2) {
-                    resultWithTwoDecimalsMax = Double.toString(toBeChecked);
-                } else {
-                    resultWithTwoDecimalsMax = resultToBeChecked[0] + resultToBeChecked[1] + decimals[0] + decimals[1];
-                }
-            }
-        }
+    //sets the max decimals to 2 and if the last digit is 0 it removes it
+    private String checkIfDecimalNeeded(BigDecimal bd) {
+        bd = bd.setScale(2, BigDecimal.ROUND_DOWN);
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        df.setMinimumFractionDigits(0);
+        df.setGroupingUsed(false);
+        resultWithTwoDecimalsMax = df.format(bd);
+        return resultWithTwoDecimalsMax;
     }
-
+    //check if VatRate is empty
     private void VatRateIsEmpty() {
         if(String.valueOf(VatRate.getText()).equals("")) {
             vatRateEmpty = true;
@@ -237,7 +244,7 @@ public class VatCalculator extends AppCompatActivity {
             vatRateEmpty = false;
         }
     }
-
+    //if VatRate is empty and in the other EditTexts the user types a number, then call this method that shows a toast, sets focus to VatRate and clears whatever the user typed
     private void alertCompleteVatRate() {
         Toast toast = Toast.makeText(getApplicationContext(), "Set a VAT rate first!", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -245,7 +252,7 @@ public class VatCalculator extends AppCompatActivity {
         VatRate.requestFocus();
         clear();
     }
-
+    //clears the EditTexts, except VatRate
     private void clear() {
         String empty = "";
         AmountWithoutVat.setText(empty);
