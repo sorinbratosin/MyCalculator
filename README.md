@@ -1,2 +1,2 @@
 # MyCalculator
-A standard calculator app
+A pocket standard calculator, vat calculator and percentage split calculator
