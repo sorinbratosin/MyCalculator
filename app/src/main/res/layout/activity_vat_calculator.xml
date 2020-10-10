@@ -11,8 +11,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Enter a Vat Rate below"
+        android:layout_marginTop="32dp"
+        android:text="Enter a Vat Rate"
         android:textAlignment="center"
         android:textColor="@color/displayTextColor"
         android:textSize="30sp"
@@ -21,44 +21,69 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="409dp"
         android:layout_height="625dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:focusableInTouchMode="true"
-        android:focusable="true">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
-        <TextView
-            android:id="@+id/vatRateTextView"
+        <LinearLayout
+            android:id="@+id/linearLayoutHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="54dp"
-            android:textAlignment="textStart"
-            android:textColor="@color/displayTextColor"
-            android:textSize="20sp"
-            android:text="@string/vatRateTextView" />
+            android:layout_marginTop="30dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/amountWithoutVatTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout">
 
-        <EditText
-            android:id="@+id/vatRateEditTextNumbers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textAlignment="textStart"
-            android:textColor="@color/displayTextColor"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/vatRateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/vatRateTextView"
+                android:textColor="@color/displayTextColor"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/vatRateEditTextNumbers"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ems="2"
+                android:inputType="numberDecimal"
+                android:textAlignment="center"
+                android:textColor="@color/displayTextColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="%"
+                android:textColor="@color/displayTextColor"
+                android:textSize="20sp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/amountWithoutVatTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/amountWithoutVatTextView"
             android:layout_marginTop="15dp"
+            android:text="@string/amountWithoutVatTextView"
             android:textAlignment="textStart"
             android:textColor="@color/displayTextColor"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/amountWithoutVatEditTextNumbers"
@@ -74,11 +99,11 @@
             android:id="@+id/vatTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vatTextView2"
             android:layout_marginTop="15dp"
+            android:text="@string/vatTextView2"
             android:textAlignment="textStart"
             android:textColor="@color/displayTextColor"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/vatEditTextNumbers"
@@ -94,11 +119,11 @@
             android:id="@+id/totalTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/totalTextView"
             android:layout_marginTop="15dp"
+            android:text="@string/totalTextView"
             android:textAlignment="textStart"
             android:textColor="@color/displayTextColor"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/totalEditTextNumbers"
