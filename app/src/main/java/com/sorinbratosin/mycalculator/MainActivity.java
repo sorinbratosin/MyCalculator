@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton standardCalculatorButton, vatCalculatorButton, percentageSplitImageButton;
+    private ImageButton standardCalculatorButton, vatCalculatorButton, percentageSplitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         startStandardCalculatorListener();
         startVatCalculatorListener();
+        startPercentageSplitButtonListener();
     }
 
     private void startStandardCalculatorListener() {
@@ -49,4 +50,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(vatCalcIntent);
     }
 
+    private void startPercentageSplitButtonListener() {
+        percentageSplitButton = (ImageButton) findViewById(R.id.percentageImageButton);
+        percentageSplitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPercentageSplit();
+            }
+        });
+    }
+
+    private void openPercentageSplit() {
+        Intent percentageSplitIntent = new Intent(this, PercentageSplit.class);
+        startActivity(percentageSplitIntent);
+    }
 }

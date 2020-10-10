@@ -27,4 +27,9 @@
     <string name="amountWithoutVatTextView">Amount without VAT</string>
     <string name="vatTextView2">VAT</string>
     <string name="totalTextView">Total</string>
+    <string name="PercentageSplitTextView">Percentage Split</string>
+    <string name="PercentageTextView">Percentage</string>
+    <string name="PercentSign">%</string>
+    <string name="AmountTextView">Amount</string>
+    <string name="ResultTextView">Result</string>
 </resources>
