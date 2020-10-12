@@ -11,4 +11,5 @@
     <color name="cButtonColor">#290404</color>
     <color name="displayTextColor">#E0FFFF</color>
     <color name="historyDisplayTextColor">#665757</color>
+    <color name="hintColor">#808080</color>
 </resources>

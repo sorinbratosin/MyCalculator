@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/PercentageSplitTextView"
+        android:typeface="serif"
         android:layout_marginTop="32dp"
         android:textAlignment="center"
         android:textColor="@color/displayTextColor"
@@ -21,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="657dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,34 +32,38 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="80dp">
 
             <TextView
-                android:id="@+id/vatRateTextView"
-                android:layout_width="wrap_content"
+                android:id="@+id/percentageTextView"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="@string/PercentageTextView"
+                android:typeface="serif"
                 android:textColor="@color/displayTextColor"
                 android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/percentageEditTextNumbers"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:ems="2"
-                android:inputType="numberDecimal"
-                android:textAlignment="center"
-                android:textColor="@color/displayTextColor"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:inputType="numberDecimal"
                 android:layout_weight="1"
+                android:gravity="end"
+                android:hint="@string/PercentageHint"
+                android:typeface="serif"
+                android:textColorHint="@color/hintColor"
+                android:textColor="@color/displayTextColor"
+                android:textSize="20sp"
+                android:importantForAutofill="no"/>
+
+            <TextView
+                android:id="@+id/percentSignTextView"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="@string/PercentSign"
                 android:textColor="@color/displayTextColor"
@@ -66,43 +71,91 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/AmountTextView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/AmountTextView"
-            android:textAlignment="textStart"
-            android:textColor="@color/displayTextColor"
-            android:textSize="20sp" />
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
 
-        <EditText
-            android:id="@+id/amountEditTextNumbers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textAlignment="textStart"
-            android:textColor="@color/displayTextColor"
-            android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/resultTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/ResultTextView"
-            android:textAlignment="textStart"
-            android:textColor="@color/displayTextColor"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/AmountTextView"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/AmountTextView"
+                android:typeface="serif"
+                android:textColor="@color/displayTextColor"
+                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/resultEditTextNumbers"
+            <EditText
+                android:id="@+id/amountEditTextNumbers"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:gravity="end"
+                android:hint="@string/AmountHint"
+                android:typeface="serif"
+                android:textColorHint="@color/hintColor"
+                android:textColor="@color/displayTextColor"
+                android:textSize="20sp"
+                android:importantForAutofill="no"/>
+
+            <TextView
+                android:id="@+id/currencySignTextView"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/CurrencySignEuroTextView"
+                android:textColor="@color/displayTextColor"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="textStart"
-            android:textColor="@color/displayTextColor"
-            android:textSize="20sp" />
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
+
+
+            <TextView
+                android:id="@+id/resultTextView"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/ResultTextView"
+                android:typeface="serif"
+                android:textColor="@color/displayTextColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/resultEditTextNumbers"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:typeface="serif"
+                android:gravity="end"
+                android:textColor="@color/displayTextColor"
+                android:textSize="20sp" />
+
+            <Space
+                android:id="@+id/spaceLayout"
+                android:layout_width="5dp"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/currencySign2TextView"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/CurrencySignEuroTextView"
+                android:textColor="@color/displayTextColor"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
