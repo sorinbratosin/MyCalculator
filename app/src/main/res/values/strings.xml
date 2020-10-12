@@ -24,12 +24,15 @@
     <string name="vatTextView">VAT Calculator</string>
     <string name="percentageSplitTextView">Percentage Split</string>
     <string name="vatRateTextView">VAT Rate</string>
-    <string name="amountWithoutVatTextView">Amount without VAT</string>
-    <string name="vatTextView2">VAT</string>
-    <string name="totalTextView">Total</string>
+    <string name="amountWithoutVatTextView">Net</string>
+    <string name="vatTextView2">Tax</string>
+    <string name="totalTextView">Gross</string>
     <string name="PercentageSplitTextView">Percentage Split</string>
     <string name="PercentageTextView">Percentage</string>
     <string name="PercentSign">%</string>
     <string name="AmountTextView">Amount</string>
     <string name="ResultTextView">Result</string>
+    <string name="CurrencySignEuroTextView">€</string>
+    <string name="PercentageHint">> 0 and &lt; 100</string>
+    <string name="AmountHint">Percentage applies to this</string>
 </resources>
