@@ -8,16 +8,17 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Toast;
-import java.text.DecimalFormat;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class VatCalculator extends AppCompatActivity {
+public class VatCalculatorActivity extends AppCompatActivity {
 
     private EditText VatRate,AmountWithoutVat,Vat,Total;
     private double vatRateDouble,vatRateForAmountWithoutVatConvertedForOperations,vatRateForTotalConvertedForOperations;
     String vatRateString, resultWithTwoDecimalsMax;
     boolean editTextsEmpty,vatRateEmpty;
+    private BigDecimal amountWithoutVatBD,vatBD,totalBD;
+    private static final BigDecimal ONE_HUNDRED = new BigDecimal("100");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,16 +147,12 @@ public class VatCalculator extends AppCompatActivity {
         } else if (!vatRateEmpty) {
             setVatRate();
 
-            BigDecimal amountWithoutVatBD = new BigDecimal(String.valueOf(AmountWithoutVat.getText()));
+            amountWithoutVatBD = new BigDecimal(String.valueOf(AmountWithoutVat.getText()));
             BigDecimal vatRateForAmountWithoutVatConvertedForOperationsBD = new BigDecimal(Double.toString(vatRateForAmountWithoutVatConvertedForOperations));
-            BigDecimal vatBD;
             vatBD = amountWithoutVatBD.multiply(vatRateForAmountWithoutVatConvertedForOperationsBD);
-            vatBD = vatBD.setScale(2, BigDecimal.ROUND_HALF_UP);
-
             Vat.setText(checkIfDecimalNeeded(vatBD));
-            BigDecimal totalBD;
+
             totalBD = amountWithoutVatBD.add(vatBD);
-            totalBD = totalBD.setScale(2, BigDecimal.ROUND_HALF_UP);
             Total.setText(checkIfDecimalNeeded(totalBD));
 
         } else {
@@ -173,16 +170,12 @@ public class VatCalculator extends AppCompatActivity {
         } else if (!vatRateEmpty) {
             setVatRate();
 
-            BigDecimal vatBD = new BigDecimal(String.valueOf(Vat.getText()));
+            vatBD = new BigDecimal(String.valueOf(Vat.getText()));
             BigDecimal vatRateBD = new BigDecimal(String.valueOf(vatRateDouble));
-            BigDecimal amountWithoutVatBD;
-            BigDecimal oneHundred = new BigDecimal("100");
-            amountWithoutVatBD = oneHundred.divide(vatRateBD,2, RoundingMode.HALF_UP).multiply(vatBD);
+            amountWithoutVatBD = ONE_HUNDRED.divide(vatRateBD,2, RoundingMode.HALF_UP).multiply(vatBD);
             AmountWithoutVat.setText(checkIfDecimalNeeded(amountWithoutVatBD));
 
-            BigDecimal totalBD;
             totalBD = amountWithoutVatBD.add(vatBD);
-            totalBD = totalBD.setScale(2, BigDecimal.ROUND_HALF_UP);
             Total.setText(checkIfDecimalNeeded(totalBD));
 
         } else  {
@@ -200,15 +193,12 @@ public class VatCalculator extends AppCompatActivity {
         } else if (!vatRateEmpty){
             setVatRate();
 
-            BigDecimal totalBD = new BigDecimal(String.valueOf(Total.getText()));
-            BigDecimal amountWithoutVatBD;
+            totalBD = new BigDecimal(String.valueOf(Total.getText()));
             BigDecimal vatRateForTotalConvertedForOperationsBD = new BigDecimal(String.valueOf(vatRateForTotalConvertedForOperations));
             amountWithoutVatBD = totalBD.divide(vatRateForTotalConvertedForOperationsBD,2, RoundingMode.HALF_UP);
             AmountWithoutVat.setText(checkIfDecimalNeeded(amountWithoutVatBD));
 
-            BigDecimal vatBD;
             vatBD = totalBD.subtract(amountWithoutVatBD);
-            vatBD = vatBD.setScale(2, BigDecimal.ROUND_HALF_UP);
             Vat.setText(checkIfDecimalNeeded(vatBD));
 
         } else {
@@ -228,13 +218,8 @@ public class VatCalculator extends AppCompatActivity {
     }
     //sets the max decimals to 2 and if the last digit is 0 it removes it
     private String checkIfDecimalNeeded(BigDecimal bd) {
-        bd = bd.setScale(2, BigDecimal.ROUND_DOWN);
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
-        df.setMinimumFractionDigits(0);
-        df.setGroupingUsed(false);
-        resultWithTwoDecimalsMax = df.format(bd);
-        return resultWithTwoDecimalsMax;
+        SetTwoDecimalsMax setTwoDecimalsMax = new SetTwoDecimalsMax(bd);
+        return setTwoDecimalsMax.getFormattedNum();
     }
     //check if VatRate is empty
     private void VatRateIsEmpty() {

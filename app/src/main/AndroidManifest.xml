@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PercentageSplit"></activity>
-        <activity android:name=".VatCalculator" />
-        <activity android:name=".StandardCalculator" />
+        <activity android:name=".PercentageSplitActivity"></activity>
+        <activity android:name=".VatCalculatorActivity" />
+        <activity android:name=".StandardCalculatorActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
