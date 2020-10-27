@@ -1,0 +1,334 @@
+package com.sorinbratosin.mycalculator;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+//display - stores the numbers pressed
+//historyDisplay - after an operator is pressed the number from display and the operator pressed are stored in the historyDisplay
+/*displayForCalculate - stores the first and second operand and the operator.(after the first cycle, the first operand is the last result and the second is the current number from display)
+ This variable is passed to the calculate method and to StandardCalculator which calculates the result */
+//result - the result returned by StandardCalculator after the calculation
+//displayTextView - the TextView on which display variable is shown
+//historyDisplayTextView - the TextView on which historyDisplay variable is shown
+//dividedByZero - is true when divide by 0 happens (alertDividedByZero() method is called, the calculator resets to default and a Toast is shown)
+//operatorAlreadyPressed - is true when the value is > 1 and the method replaceOperator() is called, replacing the last operator from historyDisplay with the one pressed
+//dotAlreadyPressed - is true when a dot is already in the display variable, preventing multiple dot button presses (resets when an operator and the method checkOperatorPressed() is called)
+/*operatorPressed - is true whenever an operator is pressed. Helps when a number is pressed after an operator is pressed so that the display will get replaced with the new number pressed (because the display still
+shows the number from before pressing the operator */
+//resultReturned - is true when StandardCalculator returns a result so that displayTextView can show it
+//firstPress - is true by default so that display can replace the 0 with the number pressed (is set to false afterwards)
+//firstCycle - is true by default so that at first displayForCalculate can get the operator, afterwards it only needs the second operand, as the first operand is the result and the operator gets set when displaying the result
+//operatorAlreadyPressedCount - helps checkIfOperatorWasAlreadyPressed() method to check if the operator was pressed more than once consecutively so that it can set boolean operatorAlreadyPressed to true
+
+
+public class StandardCalculatorActivity extends AppCompatActivity {
+
+    private TextView displayTextView, historyDisplayTextView;
+    private String display, historyDisplay, displayForCalculate, result;
+    private boolean dividedByZero, operatorAlreadyPressed, dotAlreadyPressed, operatorPressed, resultReturned,dotLastIndex,lastIndexOperator;
+    private boolean firstPress = true;
+    private boolean firstCycle = true;
+    private int operatorAlreadyPressedCount;
+    private static final String ADD_SYMBOL = "+";
+    private static final String SUBTRACT_SYMBOL = "-";
+    private static final String MULTIPLY_SYMBOL = "*";
+    private static final String DIVIDE_SYMBOL = "÷";
+    private static final String DOT_SYMBOL = ".";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_standard_calculator);
+        onStartDisplayTextView();
+    }
+
+    public void onStartDisplayTextView() {
+        displayTextView = (TextView) findViewById(R.id.displayTextView);
+        historyDisplayTextView = (TextView) findViewById(R.id.historyDisplayTextView);
+        display = "0";
+        historyDisplay = "";
+        displayForCalculate = "";
+        displayTextView.setText(display);
+        historyDisplayTextView.setText(historyDisplay);
+    }
+
+    public void buttonListener(View view) {
+        Button button = (Button) view;
+        String data = button.getText().toString();
+
+        switch (data) {
+            case "C":
+                clear();
+                break;
+            case "⌫":
+                if (!display.equals("0") && display.length() > 1) {
+                    checkBackspace();
+                } else {
+                    display = "0";
+                    operatorAlreadyPressed = true;
+                }
+                break;
+            case "=":
+                setAndCheckCalculateForEqual();
+                break;
+            case "-/+":
+                checkIfPositiveOrNegative();
+                break;
+            case ".":
+                checkDot();
+                break;
+            default:
+                //when pressing an operator first check if the operator was already pressed or not. If the operator wasn't pressed then the value from display and the operator can be assigned to the historyDisplay
+                //next check if it's the first time when the operator was pressed
+                //if the operator was already pressed, and the user pressed it again, then call the replaceOperator method which will replace the last operator from historyDisplay with the one pressed
+                if (data.equals(ADD_SYMBOL) || data.equals(SUBTRACT_SYMBOL) || data.equals(MULTIPLY_SYMBOL) || data.equals(DIVIDE_SYMBOL)) {
+                    checkOperatorPressed();
+                    checkDisplayLastIndex();
+
+                    if(dotLastIndex) {
+                        display = display;
+                        operatorPressed = false;
+                        dotLastIndex = false;
+                    } else if (!operatorAlreadyPressed) {
+                        historyDisplay += display + data;
+                        if (firstCycle) {
+                            displayForCalculate += display + data;
+                            firstCycle = false;
+                        } else {
+                            displayForCalculate += display;
+                        }
+                        calculate();
+                    } else if (operatorAlreadyPressed) {
+                        replaceOperator(data);
+                    }
+                    //the end of operator press logic
+
+                    //the start of number press
+                    //at first press when the display shows 0, the display gets replaced by the number pressed, otherwise the display adds the number to the existing one
+                    //after an operator was pressed(operatorPressed = true), display gets replaced by the number pressed
+                } else if (display.equals("0") || firstPress) {
+                    display = data;
+                    operatorAlreadyPressed = false;
+                    operatorAlreadyPressedCount = 0;
+                    firstPress = false;
+                    resultReturned = false;
+                } else if (operatorPressed) {
+                    display = data;
+                    operatorPressed = false;
+                    operatorAlreadyPressedCount = 0;
+                    resultReturned = false;
+                } else {
+                    display += data;
+                    operatorAlreadyPressed = false;
+                    operatorAlreadyPressedCount = 0;
+                    resultReturned = false;
+                }
+        }
+        //end of number press
+
+
+        //start of setting the Text of the result, history and display(that shows the numbers) to the appropriate TextViews
+        if (!resultReturned) {
+            displayTextView.setText(display);
+            historyDisplayTextView.setText(historyDisplay);
+        } else if (resultReturned) {
+            displayTextView.setText(result);
+            historyDisplayTextView.setText(historyDisplay);
+            display = "";
+            checkDisplayForCalculateLastIndex(data);
+        } else if (dividedByZero) {
+            clear();
+            dividedByZero = false;
+        }
+    }
+    //end of setting the Text
+
+
+    //create a StandardCalculator object that checks if displayForCalculate is ready to be calculated and returns the result if it's true. Wrapped in a try catch if divided by 0
+    private void calculate() {
+        try {
+            StandardCalculator standardCalc = new StandardCalculator(displayForCalculate);
+            if (standardCalc.getReadyToCalculate()) {
+                displayForCalculate = standardCalc.getResult();
+                result = displayForCalculate;
+                resultReturned = true;
+            }
+        } catch (ArithmeticException e) {
+            alertDividedByZero();
+        }
+    }
+
+    //method that gets called when the +/- button is clicked. If the number from display is positive makes it negative and vice versa
+    private void checkIfPositiveOrNegative() {
+
+        Splitter inputSplitter = new Splitter(display);
+        if (inputSplitter.splitByOperatorsListUnsortedLength() == 1 && !display.equals("0")) {
+            display = "-" + display;
+        } else if (inputSplitter.splitByOperatorsListUnsortedLength() == 2) {
+            display = inputSplitter.getSplitByOperatorsListUnsortedIndex(1);
+        }
+    }
+
+    //show a Toast when you try to divide by zero
+    private void alertDividedByZero() {
+        dividedByZero = true;
+        Context context = getApplicationContext();
+        CharSequence text = "You cannot divide by 0!";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private void checkIfOperatorWasAlreadyPressed() {
+        if (operatorAlreadyPressedCount > 1) {
+            operatorAlreadyPressed = true;
+        }
+    }
+
+    //
+    private void checkOperatorPressed() {
+        operatorAlreadyPressedCount++;
+        dotAlreadyPressed = false;
+        operatorPressed = true;
+        checkIfOperatorWasAlreadyPressed();
+    }
+
+    private void checkBackspace() {
+        if (!resultReturned) {
+            display = display.substring(0, display.length() - 1);
+        }
+    }
+
+
+    //check if the dot button was already pressed in display to restrict from displaying again if it already had
+    private void checkDot() {
+        char[] displayToChar = display.toCharArray();
+
+        for (char s : displayToChar) {
+            if (s == '.') {
+                dotAlreadyPressed = true;
+                break;
+            }
+        }
+
+        if (dotAlreadyPressed) {
+            display = display;
+        } else {
+            display += DOT_SYMBOL;
+        }
+    }
+
+    private void checkDisplayLastIndex() {
+        char[] displayToChar = display.toCharArray();
+        if(displayToChar.length > 0 && displayToChar[displayToChar.length-1] == '.') {
+            dotLastIndex = true;
+        }
+    }
+
+    private void checkDisplayForCalculateLastIndex(String data) {
+        Splitter splitter = new Splitter(displayForCalculate);
+        int lastIndex = splitter.splitByOperatorsListUnsortedLength()-1;
+        String lastIndexOperator = splitter.getSplitByOperatorsListUnsortedIndex(lastIndex);
+        if(lastIndexOperator.equals(ADD_SYMBOL) || lastIndexOperator.equals(SUBTRACT_SYMBOL) || lastIndexOperator.equals(MULTIPLY_SYMBOL) || lastIndexOperator.equals(DIVIDE_SYMBOL)) {
+            displayForCalculate = displayForCalculate;
+        } else if(!data.equals("⌫") && !data.equals("=")) {
+            displayForCalculate += data;
+        }
+    }
+
+    private void setAndCheckCalculateForEqual() {
+        List<String> forCalc = new ArrayList<>();
+        List<String> listWithoutLastOperator = new ArrayList<>();
+        String stringWithoutLastOperator = "";
+        if (!historyDisplay.equals("")) {
+            Splitter splitter = new Splitter(historyDisplay);
+            String operator = splitter.getSplitByOperatorsListUnsortedIndex(splitter.splitByOperatorsListUnsortedLength() - 1);
+            if (operator.equals(ADD_SYMBOL) || operator.equals(SUBTRACT_SYMBOL) || operator.equals(MULTIPLY_SYMBOL) || operator.equals(DIVIDE_SYMBOL)) {
+                listWithoutLastOperator = splitter.getSplitByOperatorsUnsortedList();
+                listWithoutLastOperator.remove(listWithoutLastOperator.size()-1);
+                lastIndexOperator = true;
+            }
+            if(listWithoutLastOperator.size() != 0) {
+                 stringWithoutLastOperator = TextUtils.join("", listWithoutLastOperator);
+            } else {
+                stringWithoutLastOperator = historyDisplay;
+                lastIndexOperator = false;
+            }
+            Splitter splitter1 = new Splitter(stringWithoutLastOperator);
+            if(resultReturned && splitter1.splitByOperatorsListSortedLength() < 2) {
+                forCalc.add(result);
+                forCalc.add(operator);
+                forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(0));
+            } else if (!resultReturned && splitter1.splitByOperatorsListSortedLength() < 2) {
+                forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(0));
+                forCalc.add(operator);
+                forCalc.add(display);
+            } else if (resultReturned && splitter1.splitByOperatorsListSortedLength() > 2) {
+                forCalc.add(result);
+                if(lastIndexOperator) {
+                    forCalc.add(operator);
+                } else {
+                    forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(splitter1.splitByOperatorsListSortedLength()-2));
+                }
+                forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(splitter1.splitByOperatorsListSortedLength()-1));
+            } else if (!resultReturned && splitter1.splitByOperatorsListSortedLength() > 2) {
+                forCalc.add(result);
+                if(lastIndexOperator) {
+                    forCalc.add(operator);
+                } else {
+                    forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(splitter1.splitByOperatorsListSortedLength()-2));
+                }
+                forCalc.add(display);
+            }
+        }
+        calculateForEqual(forCalc);
+    }
+
+    private void calculateForEqual(List<String> list) {
+        displayForCalculate = TextUtils.join("", list);
+        calculate();
+        historyDisplay = TextUtils.join("", list);
+        list.set(0, result);
+        operatorAlreadyPressedCount = 0;
+    }
+
+    //method called when pressing the C button or when dividing by 0, resetting the calculator to the default state
+    private void clear() {
+        display = "0";
+        historyDisplay = "";
+        displayForCalculate = "";
+        result = "";
+        operatorAlreadyPressedCount = 0;
+        firstPress = true;
+        operatorAlreadyPressed = false;
+        operatorPressed = false;
+        resultReturned = false;
+        firstCycle = true;
+        dotAlreadyPressed = false;
+        historyDisplayTextView.setText(historyDisplay);
+        displayTextView.setText(display);
+    }
+
+    //method called when pressing the operator more than one time, replacing the last operator from history display with the one pressed
+    private void replaceOperator(String operator) {
+        Splitter operatorSplit = new Splitter(historyDisplay);
+        operatorSplit.setSplitByOperatorsListUnsortedIndex(operatorSplit.splitByOperatorsListUnsortedLength() - 1, operator);
+        historyDisplay = operatorSplit.getSplitByOperatorsListUnsortedAsString();
+        Splitter operatorSplitDisplayCalculate = new Splitter(displayForCalculate);
+        operatorSplitDisplayCalculate.setSplitByOperatorsListUnsortedIndex(operatorSplitDisplayCalculate.splitByOperatorsListUnsortedLength() - 1, operator);
+        displayForCalculate = operatorSplitDisplayCalculate.getSplitByOperatorsListUnsortedAsString();
+        display = display;
+        operatorAlreadyPressed = false;
+        operatorAlreadyPressedCount = 1;
+    }
+}

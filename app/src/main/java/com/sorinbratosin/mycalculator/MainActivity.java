@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openStandardCalculator() {
-        Intent standardCalcIntent = new Intent(this, StandardCalculator.class);
+        Intent standardCalcIntent = new Intent(this, StandardCalculatorActivity.class);
         startActivity(standardCalcIntent);
     }
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openVatCalculator() {
-        Intent vatCalcIntent = new Intent(this, VatCalculator.class);
+        Intent vatCalcIntent = new Intent(this, VatCalculatorActivity.class);
         startActivity(vatCalcIntent);
     }
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openPercentageSplit() {
-        Intent percentageSplitIntent = new Intent(this, PercentageSplit.class);
+        Intent percentageSplitIntent = new Intent(this, PercentageSplitActivity.class);
         startActivity(percentageSplitIntent);
     }
 }

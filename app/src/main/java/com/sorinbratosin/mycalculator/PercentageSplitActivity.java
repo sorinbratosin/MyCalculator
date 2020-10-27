@@ -9,10 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
-public class PercentageSplit extends AppCompatActivity {
+public class PercentageSplitActivity extends AppCompatActivity {
 
     private EditText PercentEditText,AmountEditText;
     private TextView ResultEditText;
@@ -66,7 +64,7 @@ public class PercentageSplit extends AppCompatActivity {
     }
 
     private void percentRateConverted (String percent) {
-        Double percentDouble = Double.parseDouble(String.valueOf(PercentEditText.getText()));
+        double percentDouble = Double.parseDouble(String.valueOf(PercentEditText.getText()));
         String[] percentSplited = percent.split("\\.");
 
         if(percentSplited.length == 1) {
@@ -106,11 +104,7 @@ public class PercentageSplit extends AppCompatActivity {
     }
 
     private String checkIfDecimalNeeded(BigDecimal bd) {
-        bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
-        df.setMinimumFractionDigits(0);
-        df.setGroupingUsed(false);
-        return df.format(bd);
+        SetTwoDecimalsMax setTwoDecimalsMax = new SetTwoDecimalsMax(bd);
+        return setTwoDecimalsMax.getFormattedNum();
     }
 }
