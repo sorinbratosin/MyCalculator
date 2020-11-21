@@ -15,7 +15,7 @@ public class VatCalculatorActivity extends AppCompatActivity {
 
     private EditText VatRate,AmountWithoutVat,Vat,Total;
     private double vatRateDouble,vatRateForAmountWithoutVatConvertedForOperations,vatRateForTotalConvertedForOperations;
-    String vatRateString, resultWithTwoDecimalsMax;
+    String vatRateString;
     boolean editTextsEmpty,vatRateEmpty;
     private BigDecimal amountWithoutVatBD,vatBD,totalBD;
     private static final BigDecimal ONE_HUNDRED = new BigDecimal("100");

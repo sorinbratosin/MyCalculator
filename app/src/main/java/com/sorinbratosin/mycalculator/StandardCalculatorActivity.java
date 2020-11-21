@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +30,12 @@ shows the number from before pressing the operator */
 //firstPress - is true by default so that display can replace the 0 with the number pressed (is set to false afterwards)
 //firstCycle - is true by default so that at first displayForCalculate can get the operator, afterwards it only needs the second operand, as the first operand is the result and the operator gets set when displaying the result
 //operatorAlreadyPressedCount - helps checkIfOperatorWasAlreadyPressed() method to check if the operator was pressed more than once consecutively so that it can set boolean operatorAlreadyPressed to true
+//lastIndexOperator - is true if the last index of a list is an operator, and false otherwise
 
 
 public class StandardCalculatorActivity extends AppCompatActivity {
 
+    private HorizontalScrollView scrollView;
     private TextView displayTextView, historyDisplayTextView;
     private String display, historyDisplay, displayForCalculate, result;
     private boolean dividedByZero, operatorAlreadyPressed, dotAlreadyPressed, operatorPressed, resultReturned,dotLastIndex,lastIndexOperator;
@@ -55,11 +58,13 @@ public class StandardCalculatorActivity extends AppCompatActivity {
     public void onStartDisplayTextView() {
         displayTextView = (TextView) findViewById(R.id.displayTextView);
         historyDisplayTextView = (TextView) findViewById(R.id.historyDisplayTextView);
+        scrollView = (HorizontalScrollView) findViewById(R.id.scroller);
         display = "0";
         historyDisplay = "";
         displayForCalculate = "";
         displayTextView.setText(display);
         historyDisplayTextView.setText(historyDisplay);
+        historyDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public void buttonListener(View view) {
@@ -150,6 +155,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
             clear();
             dividedByZero = false;
         }
+        autoScrollHistoryDisplayTextView();
     }
     //end of setting the Text
 
@@ -168,14 +174,18 @@ public class StandardCalculatorActivity extends AppCompatActivity {
         }
     }
 
-    //method that gets called when the +/- button is clicked. If the number from display is positive makes it negative and vice versa
+    //method that gets called when the +/- button is clicked. If the number from display is positive makes it negative and vice versa. Wrapped in a try catch if display is empty
     private void checkIfPositiveOrNegative() {
-
-        Splitter inputSplitter = new Splitter(display);
-        if (inputSplitter.splitByOperatorsListUnsortedLength() == 1 && !display.equals("0")) {
-            display = "-" + display;
-        } else if (inputSplitter.splitByOperatorsListUnsortedLength() == 2) {
-            display = inputSplitter.getSplitByOperatorsListUnsortedIndex(1);
+        try {
+            Splitter inputSplitter = new Splitter(display);
+            if (inputSplitter.splitByOperatorsListUnsortedLength() == 1 && !display.equals("0")) {
+                display = "-" + display;
+            } else if (inputSplitter.splitByOperatorsListUnsortedLength() == 2) {
+                display = inputSplitter.getSplitByOperatorsListUnsortedIndex(1);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            display = display;
+            //do nothing
         }
     }
 
@@ -195,7 +205,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
         }
     }
 
-    //
+    //method called when an operator is pressed
     private void checkOperatorPressed() {
         operatorAlreadyPressedCount++;
         dotAlreadyPressed = false;
@@ -226,6 +236,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
         } else {
             display += DOT_SYMBOL;
         }
+        firstPress = false;
     }
 
     private void checkDisplayLastIndex() {
@@ -246,6 +257,8 @@ public class StandardCalculatorActivity extends AppCompatActivity {
         }
     }
 
+    //method called when Equal button is pressed
+    //Creates a List with the two operators and the operator which are going to be calculated by the calculateForEqual() method
     private void setAndCheckCalculateForEqual() {
         List<String> forCalc = new ArrayList<>();
         List<String> listWithoutLastOperator = new ArrayList<>();
@@ -294,6 +307,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
         calculateForEqual(forCalc);
     }
 
+    //method called when setAndCheckCalculateForEqual() has the List ready to be calculated
     private void calculateForEqual(List<String> list) {
         displayForCalculate = TextUtils.join("", list);
         calculate();
@@ -330,5 +344,13 @@ public class StandardCalculatorActivity extends AppCompatActivity {
         display = display;
         operatorAlreadyPressed = false;
         operatorAlreadyPressedCount = 1;
+    }
+
+    private void autoScrollHistoryDisplayTextView() {
+        scrollView.post(new Runnable() {
+            public void run() {
+                scrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
+            }
+        });
     }
 }

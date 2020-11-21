@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
-    tools:context=".StandardCalculatorActivity">
+    tools:context=".StandardCalculatorActivity"
+    android:background="@color/backgroundColor">
 
     <TextView
         android:id="@+id/displayTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
         android:layout_marginTop="64dp"
+        android:autoSizeTextType="uniform"
         android:ems="10"
-        android:importantForAutofill="no"
-        android:paddingStart="1dp"
         android:paddingEnd="8dp"
+        android:paddingStart="1dp"
+        android:importantForAutofill="no"
         android:textAlignment="textEnd"
         android:textColor="@color/displayTextColor"
         android:textSize="70sp"
@@ -26,10 +27,9 @@
 
     <HorizontalScrollView
         android:id="@+id/scroller"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayTextView">
 
@@ -43,22 +43,22 @@
             android:gravity="end"
             android:importantForAutofill="no"
             android:maxLines="1"
-            android:paddingStart="1dp"
             android:paddingEnd="8dp"
+            android:paddingStart="1dp"
             android:textColor="@color/historyDisplayTextColor"
             android:textSize="40sp"
             android:typeface="serif"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/displayTextView" />
 
     </HorizontalScrollView>
 
     <LinearLayout
         android:id="@+id/linearLayoutForButtons2"
         style="?android:attr/buttonBarStyle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -330,7 +330,6 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
