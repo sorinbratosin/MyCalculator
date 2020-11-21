@@ -90,6 +90,8 @@ public class PercentageSplitActivity extends AppCompatActivity {
             BigDecimal percentForOperationsBD = new BigDecimal(ratePercentForOperation);
             BigDecimal resultBD = amountBD.multiply(percentForOperationsBD);
             ResultEditText.setText(checkIfDecimalNeeded(resultBD));
+        } else {
+            ResultEditText.setText("");
         }
     }
 
