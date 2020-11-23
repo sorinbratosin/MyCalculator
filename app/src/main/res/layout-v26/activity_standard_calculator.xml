@@ -9,9 +9,9 @@
 
     <TextView
         android:id="@+id/displayTextView"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
         android:autoSizeTextType="uniform"
         android:ems="10"
         android:paddingEnd="8dp"
@@ -27,9 +27,10 @@
 
     <HorizontalScrollView
         android:id="@+id/scroller"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayTextView">
 
@@ -43,15 +44,15 @@
             android:gravity="end"
             android:importantForAutofill="no"
             android:maxLines="1"
-            android:paddingEnd="8dp"
             android:paddingStart="1dp"
+            android:paddingEnd="8dp"
             android:textColor="@color/historyDisplayTextColor"
             android:textSize="40sp"
             android:typeface="serif"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/displayTextView" />
+            app:layout_constraintTop_toBottomOf="parent" />
 
     </HorizontalScrollView>
 
