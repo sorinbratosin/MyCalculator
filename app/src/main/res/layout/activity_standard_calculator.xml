@@ -18,8 +18,9 @@
         android:paddingEnd="8dp"
         android:textAlignment="textEnd"
         android:textColor="@color/displayTextColor"
-        android:textSize="70sp"
+        android:textSize="@dimen/display_text_view_text_size"
         android:typeface="serif"
+        app:layout_constraintBottom_toTopOf="@+id/scroller"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,8 +29,10 @@
         android:id="@+id/scroller"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayTextView">
 
@@ -46,10 +49,10 @@
             android:paddingStart="1dp"
             android:paddingEnd="8dp"
             android:textColor="@color/historyDisplayTextColor"
-            android:textSize="40sp"
+            android:textSize="@dimen/history_display_text_view_text_size"
             android:typeface="serif"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent" />
 
@@ -59,14 +62,15 @@
         android:id="@+id/linearLayoutForButtons2"
         style="?android:attr/buttonBarStyle"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="85dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scroller">
 
 
         <Button
@@ -80,7 +84,7 @@
             android:onClick="buttonListener"
             android:text="@string/c_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="30sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -94,7 +98,7 @@
             android:onClick="buttonListener"
             android:text="@string/backspace_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -107,7 +111,7 @@
             android:onClick="buttonListener"
             android:text="@string/multiply_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
     </LinearLayout>
@@ -116,14 +120,16 @@
         android:id="@+id/linearLayoutForButtons3"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons2">
 
         <Button
             android:id="@+id/sevenButton"
@@ -136,7 +142,7 @@
             android:onClick="buttonListener"
             android:text="@string/seven_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -150,7 +156,7 @@
             android:onClick="buttonListener"
             android:text="@string/eight_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -164,7 +170,7 @@
             android:onClick="buttonListener"
             android:text="@string/nine_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -177,7 +183,7 @@
             android:onClick="buttonListener"
             android:text="@string/divide_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
     </LinearLayout>
 
@@ -185,14 +191,15 @@
         android:id="@+id/linearLayoutForButtons4"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons3">
 
         <Button
             android:id="@+id/fourButton"
@@ -205,7 +212,7 @@
             android:onClick="buttonListener"
             android:text="@string/four_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -219,7 +226,7 @@
             android:onClick="buttonListener"
             android:text="@string/five_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -233,7 +240,7 @@
             android:onClick="buttonListener"
             android:text="@string/six_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -246,7 +253,7 @@
             android:onClick="buttonListener"
             android:text="@string/plus_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
     </LinearLayout>
 
@@ -254,14 +261,15 @@
         android:id="@+id/linearLayoutForButtons5"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons4">
 
         <Button
             android:id="@+id/oneButton"
@@ -274,7 +282,7 @@
             android:onClick="buttonListener"
             android:text="@string/one_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -288,7 +296,7 @@
             android:onClick="buttonListener"
             android:text="@string/two_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -302,7 +310,7 @@
             android:onClick="buttonListener"
             android:text="@string/three_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -315,7 +323,7 @@
             android:onClick="buttonListener"
             android:text="@string/minus_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
     </LinearLayout>
 
@@ -323,7 +331,7 @@
         android:id="@+id/linearLayoutForButtons6"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="50dp"
@@ -331,7 +339,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons5">
 
         <Button
             android:id="@+id/negativePositiveButton"
@@ -344,7 +353,7 @@
             android:onClick="buttonListener"
             android:text="@string/negative_positive_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -358,7 +367,7 @@
             android:onClick="buttonListener"
             android:text="@string/zero_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -372,7 +381,7 @@
             android:onClick="buttonListener"
             android:text="@string/dot_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
@@ -385,7 +394,7 @@
             android:onClick="buttonListener"
             android:text="@string/equal_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
     </LinearLayout>
 

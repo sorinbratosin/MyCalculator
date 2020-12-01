@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="display_text_view_text_size">50sp</dimen>
+    <dimen name="history_display_text_view_text_size">35sp</dimen>
+    <dimen name="standard_calculator_button_text_size">25sp</dimen>
+    <dimen name="standard_calculator_linear_layout_height">50dp</dimen>
+</resources>

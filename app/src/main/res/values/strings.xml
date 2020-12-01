@@ -34,5 +34,5 @@
     <string name="ResultTextView">Result</string>
     <string name="CurrencySignEuroTextView">€</string>
     <string name="PercentageHint">> 0 and &lt; 100</string>
-    <string name="AmountHint">Percentage applies to this</string>
+    <string name="AmountHint">% applies to this</string>
 </resources>
