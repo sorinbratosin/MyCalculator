@@ -11,16 +11,17 @@
         android:id="@+id/displayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="20dp"
         android:autoSizeTextType="uniform"
-        android:ems="10"
         android:paddingEnd="8dp"
         android:paddingStart="1dp"
         android:importantForAutofill="no"
         android:textAlignment="textEnd"
         android:textColor="@color/displayTextColor"
-        android:textSize="70sp"
+        android:textSize="@dimen/display_text_view_text_size"
         android:typeface="serif"
+        android:maxLines="1"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +48,7 @@
             android:paddingStart="1dp"
             android:paddingEnd="8dp"
             android:textColor="@color/historyDisplayTextColor"
-            android:textSize="40sp"
+            android:textSize="@dimen/history_display_text_view_text_size"
             android:typeface="serif"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -60,20 +61,23 @@
         android:id="@+id/linearLayoutForButtons2"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintVertical_bias="1.0"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scroller">
 
 
         <Button
             android:id="@+id/cButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -81,34 +85,34 @@
             android:onClick="buttonListener"
             android:text="@string/c_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="30sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/backspaceButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
-            android:layout_weight="4"
+            android:layout_weight="2"
             android:background="@drawable/roundedbutton"
             android:onClick="buttonListener"
             android:text="@string/backspace_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/multiplyButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/roundedoperatorsbuttons"
             android:onClick="buttonListener"
             android:text="@string/multiply_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
     </LinearLayout>
@@ -117,11 +121,12 @@
         android:id="@+id/linearLayoutForButtons3"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -129,7 +134,7 @@
         <Button
             android:id="@+id/sevenButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -137,13 +142,13 @@
             android:onClick="buttonListener"
             android:text="@string/seven_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/eightButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -151,13 +156,13 @@
             android:onClick="buttonListener"
             android:text="@string/eight_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/nineButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -165,20 +170,20 @@
             android:onClick="buttonListener"
             android:text="@string/nine_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/divideButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/roundedoperatorsbuttons"
             android:onClick="buttonListener"
             android:text="@string/divide_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
     </LinearLayout>
 
@@ -186,11 +191,12 @@
         android:id="@+id/linearLayoutForButtons4"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -198,7 +204,7 @@
         <Button
             android:id="@+id/fourButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -206,13 +212,13 @@
             android:onClick="buttonListener"
             android:text="@string/four_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/fiveButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -220,13 +226,13 @@
             android:onClick="buttonListener"
             android:text="@string/five_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/sixButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -234,20 +240,20 @@
             android:onClick="buttonListener"
             android:text="@string/six_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/plusButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/roundedoperatorsbuttons"
             android:onClick="buttonListener"
             android:text="@string/plus_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
     </LinearLayout>
 
@@ -255,11 +261,12 @@
         android:id="@+id/linearLayoutForButtons5"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -267,7 +274,7 @@
         <Button
             android:id="@+id/oneButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -275,13 +282,13 @@
             android:onClick="buttonListener"
             android:text="@string/one_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/twoButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -289,13 +296,13 @@
             android:onClick="buttonListener"
             android:text="@string/two_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/threeButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -303,20 +310,20 @@
             android:onClick="buttonListener"
             android:text="@string/three_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/minusButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/roundedoperatorsbuttons"
             android:onClick="buttonListener"
             android:text="@string/minus_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
     </LinearLayout>
 
@@ -324,11 +331,12 @@
         android:id="@+id/linearLayoutForButtons6"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="50dp"
         android:orientation="horizontal"
+        android:weightSum="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -336,7 +344,7 @@
         <Button
             android:id="@+id/negativePositiveButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -344,13 +352,13 @@
             android:onClick="buttonListener"
             android:text="@string/negative_positive_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/zeroButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -358,13 +366,13 @@
             android:onClick="buttonListener"
             android:text="@string/zero_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/dotButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -372,20 +380,20 @@
             android:onClick="buttonListener"
             android:text="@string/dot_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
 
         <Button
             android:id="@+id/equalButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/roundedequalbutton"
             android:onClick="buttonListener"
             android:text="@string/equal_button"
             android:textColor="@color/buttonTextColor"
-            android:textSize="25sp"
+            android:textSize="@dimen/standard_calculator_button_text_size"
             android:typeface="serif" />
     </LinearLayout>
 
