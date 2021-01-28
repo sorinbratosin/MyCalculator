@@ -15,17 +15,17 @@
         android:text="@string/PercentageSplitTextView"
         android:textAlignment="center"
         android:textColor="@color/displayTextColor"
-        android:textSize="30sp"
+        android:textSize="@dimen/title_activities_text_size"
         android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/mainLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/percentage_and_vat_activity_mainLinearlayout_marginTop"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,23 +35,23 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/percentageTextView"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/percentage_and_vat_activity_firstRow_layout_width"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="@string/PercentageTextView"
                 android:textColor="@color/displayTextColor"
-                android:textSize="20sp"
+                android:textSize="@dimen/percentage_and_vat_activity_row_text_size"
                 android:typeface="serif" />
 
             <EditText
                 android:id="@+id/percentageEditTextNumbers"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:hint="@string/PercentageHint"
@@ -59,7 +59,7 @@
                 android:inputType="numberDecimal"
                 android:textColor="@color/displayTextColor"
                 android:textColorHint="@color/hintColor"
-                android:textSize="@dimen/percentage_split_amount_hint_text_size"
+                android:textSize="@dimen/percentage_and_vat_activity_row_text_size"
                 android:typeface="serif" />
 
             <TextView
@@ -69,31 +69,31 @@
                 android:gravity="center_vertical"
                 android:text="@string/PercentSign"
                 android:textColor="@color/displayTextColor"
-                android:textSize="20sp" />
+                android:textSize="@dimen/percentage_and_vat_activity_row_text_size" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/percentage_activity_childs_Linearlayouts_marginTop"
             android:orientation="horizontal">
 
 
             <TextView
                 android:id="@+id/AmountTextView"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/percentage_and_vat_activity_otherRows_layout_width"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="@string/AmountTextView"
                 android:textColor="@color/displayTextColor"
-                android:textSize="20sp"
+                android:textSize="@dimen/percentage_and_vat_activity_row_text_size"
                 android:typeface="serif" />
 
             <EditText
                 android:id="@+id/amountEditTextNumbers"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:hint="@string/AmountHint"
@@ -101,7 +101,7 @@
                 android:inputType="numberDecimal"
                 android:textColor="@color/displayTextColor"
                 android:textColorHint="@color/hintColor"
-                android:textSize="@dimen/percentage_split_amount_hint_text_size"
+                android:textSize="@dimen/percentage_and_vat_activity_row_text_size"
                 android:typeface="serif" />
 
             <TextView
@@ -111,26 +111,26 @@
                 android:gravity="center_vertical"
                 android:text="@string/CurrencySignEuroTextView"
                 android:textColor="@color/displayTextColor"
-                android:textSize="20sp" />
+                android:textSize="@dimen/percentage_and_vat_activity_row_text_size" />
 
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/percentage_activity_childs_Linearlayouts_marginTop"
             android:orientation="horizontal">
 
 
             <TextView
                 android:id="@+id/resultTextView"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/percentage_and_vat_activity_otherRows_layout_width"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="@string/ResultTextView"
                 android:textColor="@color/displayTextColor"
-                android:textSize="20sp"
+                android:textSize="@dimen/percentage_and_vat_activity_row_text_size"
                 android:typeface="serif" />
 
             <TextView
@@ -140,7 +140,7 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 android:textColor="@color/displayTextColor"
-                android:textSize="20sp"
+                android:textSize="@dimen/percentage_and_vat_activity_row_text_size"
                 android:typeface="serif" />
 
             <Space
@@ -155,7 +155,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/CurrencySignEuroTextView"
                 android:textColor="@color/displayTextColor"
-                android:textSize="20sp" />
+                android:textSize="@dimen/percentage_and_vat_activity_row_text_size" />
 
         </LinearLayout>
 

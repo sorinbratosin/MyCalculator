@@ -28,7 +28,7 @@
     <string name="vatTextView2">Tax</string>
     <string name="totalTextView">Gross</string>
     <string name="PercentageSplitTextView">Percentage Split</string>
-    <string name="PercentageTextView">Percentage</string>
+    <string name="PercentageTextView">Percent</string>
     <string name="PercentSign">%</string>
     <string name="AmountTextView">Amount</string>
     <string name="ResultTextView">Result</string>

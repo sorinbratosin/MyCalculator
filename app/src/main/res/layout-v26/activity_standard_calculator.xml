@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StandardCalculatorActivity"
-    android:background="@color/backgroundColor">
+    android:background="@color/backgroundColor"
+    tools:context=".StandardCalculatorActivity">
 
     <TextView
         android:id="@+id/displayTextView"
@@ -13,16 +13,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:autoSizeTextType="uniform"
-        android:paddingEnd="8dp"
-        android:paddingStart="1dp"
         android:importantForAutofill="no"
+        android:maxLines="1"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:textAlignment="textEnd"
         android:textColor="@color/displayTextColor"
         android:textSize="@dimen/display_text_view_text_size"
         android:typeface="serif"
-        android:maxLines="1"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,15 +38,16 @@
         <TextView
             android:id="@+id/historyDisplayTextView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:gravity="end"
             android:importantForAutofill="no"
             android:maxLines="1"
-            android:paddingStart="1dp"
+            android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:paddingBottom="8dp"
             android:textColor="@color/historyDisplayTextColor"
             android:textSize="@dimen/history_display_text_view_text_size"
             android:typeface="serif"
@@ -67,11 +68,11 @@
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         android:weightSum="4"
-        app:layout_constraintVertical_bias="1.0"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scroller">
+        app:layout_constraintTop_toBottomOf="@+id/scroller"
+        app:layout_constraintVertical_bias="1.0">
 
 
         <Button
