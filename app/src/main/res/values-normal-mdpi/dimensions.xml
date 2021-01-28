@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="display_text_view_text_size">50sp</dimen>
+    <dimen name="history_display_text_view_text_size">30sp</dimen>
+    <dimen name="standard_calculator_button_text_size">25sp</dimen>
+    <dimen name="standard_calculator_linear_layout_height">45dp</dimen>
+    <dimen name="main_activity_text_size">15sp</dimen>
+    <dimen name="main_activity_image_buttons_width">80dp</dimen>
+    <dimen name="percentage_split_amount_hint_text_size">17sp</dimen>
+</resources>
