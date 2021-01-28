@@ -9,37 +9,36 @@
 
     <TextView
         android:id="@+id/displayTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:ems="10"
+        android:layout_marginTop="20dp"
+
         android:importantForAutofill="no"
+        android:maxLines="1"
         android:paddingStart="1dp"
         android:paddingEnd="8dp"
         android:textAlignment="textEnd"
         android:textColor="@color/displayTextColor"
         android:textSize="@dimen/display_text_view_text_size"
         android:typeface="serif"
-        app:layout_constraintBottom_toTopOf="@+id/scroller"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
         android:id="@+id/scroller"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons2"
+        android:layout_height="@dimen/history_display_text_view_layout_height"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayTextView">
 
         <TextView
             android:id="@+id/historyDisplayTextView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/history_display_text_view_layout_height"
             android:layout_gravity="end"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -52,7 +51,7 @@
             android:textSize="@dimen/history_display_text_view_text_size"
             android:typeface="serif"
             app:layout_constraintEnd_toEndOf="parent"
-
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent" />
 
@@ -61,22 +60,24 @@
     <LinearLayout
         android:id="@+id/linearLayoutForButtons2"
         style="?android:attr/buttonBarStyle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="85dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scroller">
+        app:layout_constraintTop_toBottomOf="@+id/scroller"
+        app:layout_constraintVertical_bias="1.0">
 
 
         <Button
             android:id="@+id/cButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -90,10 +91,10 @@
         <Button
             android:id="@+id/backspaceButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
-            android:layout_weight="4"
+            android:layout_weight="2"
             android:background="@drawable/roundedbutton"
             android:onClick="buttonListener"
             android:text="@string/backspace_button"
@@ -104,7 +105,7 @@
         <Button
             android:id="@+id/multiplyButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/roundedoperatorsbuttons"
@@ -122,19 +123,18 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/standard_calculator_linear_layout_height"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons2">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/sevenButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -148,7 +148,7 @@
         <Button
             android:id="@+id/eightButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -162,7 +162,7 @@
         <Button
             android:id="@+id/nineButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -176,7 +176,7 @@
         <Button
             android:id="@+id/divideButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/roundedoperatorsbuttons"
@@ -196,15 +196,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons3">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/fourButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -218,7 +218,7 @@
         <Button
             android:id="@+id/fiveButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -232,7 +232,7 @@
         <Button
             android:id="@+id/sixButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -246,7 +246,7 @@
         <Button
             android:id="@+id/plusButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/roundedoperatorsbuttons"
@@ -266,15 +266,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutForButtons6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons4">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/oneButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -288,7 +288,7 @@
         <Button
             android:id="@+id/twoButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -302,7 +302,7 @@
         <Button
             android:id="@+id/threeButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -316,7 +316,7 @@
         <Button
             android:id="@+id/minusButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/roundedoperatorsbuttons"
@@ -336,16 +336,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="50dp"
         android:orientation="horizontal"
+        android:weightSum="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons5">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/negativePositiveButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -359,7 +358,7 @@
         <Button
             android:id="@+id/zeroButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -373,7 +372,7 @@
         <Button
             android:id="@+id/dotButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
@@ -387,7 +386,7 @@
         <Button
             android:id="@+id/equalButton"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/roundedequalbutton"
