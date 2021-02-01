@@ -63,7 +63,7 @@
 
             <TextView
                 android:id="@+id/PercentTextView"
-                android:layout_width="20dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:paddingEnd="4dp"
                 android:gravity="center_vertical"
@@ -103,7 +103,7 @@
 
             <TextView
                 android:id="@+id/currencySignTextView"
-                android:layout_width="20dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingEnd="4dp"
@@ -144,7 +144,7 @@
 
             <TextView
                 android:id="@+id/currencySignTextView2"
-                android:layout_width="20dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingEnd="4dp"
@@ -185,7 +185,7 @@
 
             <TextView
                 android:id="@+id/currencySignTextView3"
-                android:layout_width="20dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingEnd="4dp"

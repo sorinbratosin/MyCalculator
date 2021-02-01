@@ -8,14 +8,13 @@
     <dimen name="history_display_text_view_text_size">20sp</dimen>
     <dimen name="display_text_view_Layout_height">40dp</dimen>
     <dimen name="history_display_text_view_layout_height">30dp</dimen>
-    <dimen name="standard_calculator_button_text_size">10sp</dimen>
+    <dimen name="standard_calculator_button_text_size">20sp</dimen>
 
     <dimen name="percentage_split_linear_layout_height">60dp</dimen>
-    <dimen name="percentage_and_vat_activity_firstRow_layout_width">120dp</dimen>
-    <dimen name="percentage_and_vat_activity_otherRows_layout_width">120dp</dimen>
-    <dimen name="percentage_and_vat_activity_mainLinearlayout_marginTop">24dp</dimen>
+    <dimen name="percentage_activity_first_column_layout_width">120dp</dimen>
     <dimen name="percentage_activity_childs_Linearlayouts_marginTop">40dp</dimen>
 
+    <dimen name="percentage_and_vat_activity_mainLinearlayout_marginTop">24dp</dimen>
     <dimen name="percentage_and_vat_activity_row_text_size">20sp</dimen>
 
     <dimen name="vat_activity_child_Linearlayouts_width">90dp</dimen>
