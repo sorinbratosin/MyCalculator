@@ -40,7 +40,7 @@
 
             <TextView
                 android:id="@+id/percentageTextView"
-                android:layout_width="@dimen/percentage_and_vat_activity_firstRow_layout_width"
+                android:layout_width="@dimen/percentage_activity_first_column_layout_width"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingStart="4dp"
@@ -65,7 +65,7 @@
 
             <TextView
                 android:id="@+id/percentSignTextView"
-                android:layout_width="20dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingEnd="4dp"
@@ -84,7 +84,7 @@
 
             <TextView
                 android:id="@+id/AmountTextView"
-                android:layout_width="@dimen/percentage_and_vat_activity_otherRows_layout_width"
+                android:layout_width="@dimen/percentage_activity_first_column_layout_width"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingStart="4dp"
@@ -109,7 +109,7 @@
 
             <TextView
                 android:id="@+id/currencySignTextView"
-                android:layout_width="20dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingEnd="4dp"
@@ -129,7 +129,7 @@
 
             <TextView
                 android:id="@+id/resultTextView"
-                android:layout_width="@dimen/percentage_and_vat_activity_otherRows_layout_width"
+                android:layout_width="@dimen/percentage_activity_first_column_layout_width"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingStart="4dp"
@@ -155,7 +155,7 @@
 
             <TextView
                 android:id="@+id/currencySign2TextView"
-                android:layout_width="20dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingEnd="4dp"
