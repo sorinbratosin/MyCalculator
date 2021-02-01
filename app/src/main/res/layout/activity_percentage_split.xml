@@ -43,6 +43,7 @@
                 android:layout_width="@dimen/percentage_and_vat_activity_firstRow_layout_width"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
+                android:paddingStart="4dp"
                 android:text="@string/PercentageTextView"
                 android:textColor="@color/displayTextColor"
                 android:textSize="@dimen/percentage_and_vat_activity_row_text_size"
@@ -67,6 +68,7 @@
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
+                android:paddingEnd="4dp"
                 android:text="@string/PercentSign"
                 android:textColor="@color/displayTextColor"
                 android:textSize="@dimen/percentage_and_vat_activity_row_text_size" />
@@ -85,6 +87,7 @@
                 android:layout_width="@dimen/percentage_and_vat_activity_otherRows_layout_width"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
+                android:paddingStart="4dp"
                 android:text="@string/AmountTextView"
                 android:textColor="@color/displayTextColor"
                 android:textSize="@dimen/percentage_and_vat_activity_row_text_size"
@@ -109,6 +112,7 @@
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
+                android:paddingEnd="4dp"
                 android:text="@string/CurrencySignEuroTextView"
                 android:textColor="@color/displayTextColor"
                 android:textSize="@dimen/percentage_and_vat_activity_row_text_size" />
@@ -128,6 +132,7 @@
                 android:layout_width="@dimen/percentage_and_vat_activity_otherRows_layout_width"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
+                android:paddingStart="4dp"
                 android:text="@string/ResultTextView"
                 android:textColor="@color/displayTextColor"
                 android:textSize="@dimen/percentage_and_vat_activity_row_text_size"
@@ -153,6 +158,7 @@
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
+                android:paddingEnd="4dp"
                 android:text="@string/CurrencySignEuroTextView"
                 android:textColor="@color/displayTextColor"
                 android:textSize="@dimen/percentage_and_vat_activity_row_text_size" />

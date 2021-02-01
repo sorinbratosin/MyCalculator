@@ -9,9 +9,7 @@
     <dimen name="display_text_view_Layout_height">60dp</dimen>
     <dimen name="history_display_text_view_layout_height">35dp</dimen>
     <dimen name="standard_calculator_button_text_size">20sp</dimen>
-    <dimen name="standard_calculator_linear_layout_height">40dp</dimen>
 
-    <dimen name="percentage_split_amount_hint_text_size">20sp</dimen>
     <dimen name="percentage_split_linear_layout_height">40dp</dimen>
     <dimen name="percentage_and_vat_activity_firstRow_layout_width">120dp</dimen>
     <dimen name="percentage_and_vat_activity_otherRows_layout_width">120dp</dimen>
