@@ -1,12 +1,8 @@
 package com.sorinbratosin.mycalculator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StandardCalculator extends Calculator {
-
-    private List<String> numbersAndOperator = new ArrayList<>();
-    private boolean readyToCalculate;
 
     StandardCalculator(String input) {
         checkIfReadyToCalculate(input);
@@ -16,15 +12,6 @@ public class StandardCalculator extends Calculator {
     void calculate(List<String> list) {
         Calculate calculate = new Calculate(list);
         result = calculate.getResult();
-    }
-
-    @Override
-    String getResult() {
-        return result;
-    }
-
-    boolean getReadyToCalculate() {
-        return readyToCalculate;
     }
 
     private void checkIfReadyToCalculate(String input) {
