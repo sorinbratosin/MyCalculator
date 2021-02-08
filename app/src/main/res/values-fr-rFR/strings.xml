@@ -19,4 +19,5 @@
     <string name="ToastAlertVatRateOver100">La valeur doit être inférieure à 100</string>
     <string name="ToastAlertFirstNumIsZeroSecondIsNum">Format de valeur illégal!</string>
     <string name="PercentageTextView">" Pour cent"</string>
+    <string name="ToastAlertCalculateWithASingleNum">Vous ne pouvez pas calculer avec un seul nombre!</string>
 </resources>

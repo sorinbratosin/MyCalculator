@@ -39,4 +39,5 @@
     <string name="ToastCompleteVatRateFirst">Set a VAT rate first!</string>
     <string name="ToastAlertVatRateOver100">The value must be less than 100</string>
     <string name="ToastAlertFirstNumIsZeroSecondIsNum">Illegal value format!</string>
+    <string name="ToastAlertCalculateWithASingleNum">You cannot calculate with a single number!</string>
 </resources>

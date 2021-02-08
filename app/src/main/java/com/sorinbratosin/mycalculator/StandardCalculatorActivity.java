@@ -6,11 +6,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
     private HorizontalScrollView scrollView;
     private TextView displayTextView, historyDisplayTextView;
     private String display, historyDisplay, displayForCalculate, result;
-    private boolean dividedByZero, operatorAlreadyPressed, dotAlreadyPressed, operatorPressed, resultReturned,dotLastIndex,lastIndexOperator;
+    private boolean dividedByZero, operatorAlreadyPressed, dotAlreadyPressed, operatorPressed, resultReturned, dotLastIndex, lastIndexOperator;
     private boolean firstPress = true;
     private boolean firstCycle = true;
     private int operatorAlreadyPressedCount;
@@ -84,7 +86,14 @@ public class StandardCalculatorActivity extends AppCompatActivity {
                 }
                 break;
             case "=":
-                setAndCheckCalculateForEqual();
+                try {
+                    checkDisplayLastIndex();
+                    if (!dotLastIndex) {
+                        setAndCheckCalculateForEqual();
+                    }
+                } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+                    alertCalculateWithASingleNumber();
+                }
                 break;
             case "-/+":
                 checkIfPositiveOrNegative();
@@ -100,7 +109,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
                     checkOperatorPressed();
                     checkDisplayLastIndex();
 
-                    if(dotLastIndex) {
+                    if (dotLastIndex) {
                         display = display;
                         operatorPressed = false;
                         dotLastIndex = false;
@@ -242,18 +251,20 @@ public class StandardCalculatorActivity extends AppCompatActivity {
 
     private void checkDisplayLastIndex() {
         char[] displayToChar = display.toCharArray();
-        if(displayToChar.length > 0 && displayToChar[displayToChar.length-1] == '.') {
+        if (displayToChar.length > 0 && displayToChar[displayToChar.length - 1] == '.') {
             dotLastIndex = true;
+        } else {
+            dotLastIndex = false;
         }
     }
 
     private void checkDisplayForCalculateLastIndex(String data) {
         Splitter splitter = new Splitter(displayForCalculate);
-        int lastIndex = splitter.splitByOperatorsListUnsortedLength()-1;
+        int lastIndex = splitter.splitByOperatorsListUnsortedLength() - 1;
         String lastIndexOperator = splitter.getSplitByOperatorsListUnsortedIndex(lastIndex);
-        if(lastIndexOperator.equals(ADD_SYMBOL) || lastIndexOperator.equals(SUBTRACT_SYMBOL) || lastIndexOperator.equals(MULTIPLY_SYMBOL) || lastIndexOperator.equals(DIVIDE_SYMBOL)) {
+        if (lastIndexOperator.equals(ADD_SYMBOL) || lastIndexOperator.equals(SUBTRACT_SYMBOL) || lastIndexOperator.equals(MULTIPLY_SYMBOL) || lastIndexOperator.equals(DIVIDE_SYMBOL)) {
             displayForCalculate = displayForCalculate;
-        } else if(!data.equals("⌫") && !data.equals("=")) {
+        } else if (!data.equals("⌫") && !data.equals("=")) {
             displayForCalculate += data;
         }
     }
@@ -269,17 +280,17 @@ public class StandardCalculatorActivity extends AppCompatActivity {
             String operator = splitter.getSplitByOperatorsListUnsortedIndex(splitter.splitByOperatorsListUnsortedLength() - 1);
             if (operator.equals(ADD_SYMBOL) || operator.equals(SUBTRACT_SYMBOL) || operator.equals(MULTIPLY_SYMBOL) || operator.equals(DIVIDE_SYMBOL)) {
                 listWithoutLastOperator = splitter.getSplitByOperatorsUnsortedList();
-                listWithoutLastOperator.remove(listWithoutLastOperator.size()-1);
+                listWithoutLastOperator.remove(listWithoutLastOperator.size() - 1);
                 lastIndexOperator = true;
             }
-            if(listWithoutLastOperator.size() != 0) {
-                 stringWithoutLastOperator = TextUtils.join("", listWithoutLastOperator);
+            if (listWithoutLastOperator.size() != 0) {
+                stringWithoutLastOperator = TextUtils.join("", listWithoutLastOperator);
             } else {
                 stringWithoutLastOperator = historyDisplay;
                 lastIndexOperator = false;
             }
             Splitter splitter1 = new Splitter(stringWithoutLastOperator);
-            if(resultReturned && splitter1.splitByOperatorsListSortedLength() < 2) {
+            if (resultReturned && splitter1.splitByOperatorsListSortedLength() < 2) {
                 forCalc.add(result);
                 forCalc.add(operator);
                 forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(0));
@@ -289,18 +300,18 @@ public class StandardCalculatorActivity extends AppCompatActivity {
                 forCalc.add(display);
             } else if (resultReturned && splitter1.splitByOperatorsListSortedLength() > 2) {
                 forCalc.add(result);
-                if(lastIndexOperator) {
+                if (lastIndexOperator) {
                     forCalc.add(operator);
                 } else {
-                    forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(splitter1.splitByOperatorsListSortedLength()-2));
+                    forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(splitter1.splitByOperatorsListSortedLength() - 2));
                 }
-                forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(splitter1.splitByOperatorsListSortedLength()-1));
+                forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(splitter1.splitByOperatorsListSortedLength() - 1));
             } else if (!resultReturned && splitter1.splitByOperatorsListSortedLength() > 2) {
                 forCalc.add(result);
-                if(lastIndexOperator) {
+                if (lastIndexOperator) {
                     forCalc.add(operator);
                 } else {
-                    forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(splitter1.splitByOperatorsListSortedLength()-2));
+                    forCalc.add(splitter1.getSplitByOperatorsListSortedIndex(splitter1.splitByOperatorsListSortedLength() - 2));
                 }
                 forCalc.add(display);
             }
@@ -345,6 +356,12 @@ public class StandardCalculatorActivity extends AppCompatActivity {
         display = display;
         operatorAlreadyPressed = false;
         operatorAlreadyPressedCount = 1;
+    }
+
+    private void alertCalculateWithASingleNumber() {
+        Toast toast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.ToastAlertCalculateWithASingleNum), Toast.LENGTH_LONG);
+        //toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     private void autoScrollHistoryDisplayTextView() {

@@ -14,7 +14,7 @@ public class SortNumbersAndOperatorsList {
         sort(this.list);
     }
 
-    private void sort(List<String> list) {
+    private void sort(List<String> list) throws IndexOutOfBoundsException{
         if(list.get(0).equals("-")) {
             mergeList(list,0);
         }
@@ -27,32 +27,6 @@ public class SortNumbersAndOperatorsList {
                 }
             }
         }
-        /*switch (list.size()) {
-
-            case 2:
-                if (list.get(0).equals("-")) {
-                    mergeList(list, 0);
-                }
-                break;
-            case 3:
-                if (list.get(0).equals("-")) {
-                    mergeList(list, 0);
-                }
-                break;
-
-            case 4:
-                if (list.get(0).equals("-")) {
-                    mergeList(list, 0);
-                } else {
-                    mergeList(list, 2);
-                }
-                break;
-
-            case 5:
-                mergeList(list, 0);
-                mergeList(list, 2);
-                break;
-        } */
     }
 
     private void checkList(List<String> list) {

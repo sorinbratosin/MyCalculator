@@ -19,4 +19,5 @@
     <string name="ToastCompleteVatRateFirst">Setează o cotă de TVA!</string>
     <string name="ToastAlertVatRateOver100">Valoarea trebuie să fie mai mică de 100</string>
     <string name="ToastAlertFirstNumIsZeroSecondIsNum">Formatul valorii neacceptat!</string>
+    <string name="ToastAlertCalculateWithASingleNum">Nu poți calcula cu un singur număr!</string>
 </resources>
