@@ -130,7 +130,7 @@ public class PercentageSplitActivity extends AppCompatActivity {
 
     //clears everything when the user enters a value of 100 or over
     private void alertValueOver100() {
-        Toast toast = Toast.makeText(getApplicationContext(), "The value must be less than 100", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.ToastAlertVatRateOver100), Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
         PercentEditText.requestFocus();
@@ -138,7 +138,7 @@ public class PercentageSplitActivity extends AppCompatActivity {
     }
 
     private void alertFirstNumIsZeroSecondIsNumber() {
-        Toast toast = Toast.makeText(getApplicationContext(), "Illegal value format!", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.ToastAlertFirstNumIsZeroSecondIsNum), Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
         PercentEditText.requestFocus();

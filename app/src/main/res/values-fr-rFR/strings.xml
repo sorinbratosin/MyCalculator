@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MaCalculatrice</string>
+    <string name="chooseTextView">Choisissez une activité</string>
+    <string name="standardCalcTextView">Calculatrice Standard</string>
+    <string name="vatTextView">Calculateur de TVA</string>
+    <string name="percentageSplitTextView">Partage en pourcentage</string>
+    <string name="vatRateTextView">Taux de TVA</string>
+    <string name="amountWithoutVatTextView">HT</string>
+    <string name="vatTextView2">TVA</string>
+    <string name="totalTextView">TTC</string>
+    <string name="PercentageSplitTextView">Partage en pourcentage</string>
+    <string name="AmountTextView">Montant</string>
+    <string name="ResultTextView">Résultat</string>
+    <string name="PercentageHint">> 0 et &lt; 100</string>
+    <string name="AmountHint">% s\'applique à cela</string>
+    <string name="ToastDivideByZero">Vous ne pouvez pas diviser par 0!</string>
+    <string name="ToastCompleteVatRateFirst">Définissez d\'abord un taux de TVA!</string>
+    <string name="ToastAlertVatRateOver100">La valeur doit être inférieure à 100</string>
+    <string name="ToastAlertFirstNumIsZeroSecondIsNum">Format de valeur illégal!</string>
+    <string name="PercentageTextView">" Pour cent"</string>
+</resources>
