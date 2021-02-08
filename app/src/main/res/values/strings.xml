@@ -1,24 +1,24 @@
 <resources>
     <string name="app_name">MyCalculator</string>
-    <string name="c_button">C</string>
-    <string name="backspace_button">⌫</string>
-    <string name="multiply_button">*</string>
-    <string name="seven_button">7</string>
-    <string name="eight_button">8</string>
-    <string name="nine_button">9</string>
-    <string name="divide_button">÷</string>
-    <string name="four_button">4</string>
-    <string name="five_button">5</string>
-    <string name="six_button">6</string>
-    <string name="plus_button">+</string>
-    <string name="one_button">1</string>
-    <string name="two_button">2</string>
-    <string name="three_button">3</string>
-    <string name="minus_button">-</string>
-    <string name="negative_positive_button">-/+</string>
-    <string name="zero_button">0</string>
-    <string name="dot_button">.</string>
-    <string name="equal_button">=</string>
+    <string name="c_button" translatable="false">C</string>
+    <string name="backspace_button" translatable="false">⌫</string>
+    <string name="multiply_button" translatable="false">*</string>
+    <string name="seven_button" translatable="false">7</string>
+    <string name="eight_button" translatable="false">8</string>
+    <string name="nine_button" translatable="false">9</string>
+    <string name="divide_button" translatable="false">÷</string>
+    <string name="four_button" translatable="false">4</string>
+    <string name="five_button" translatable="false">5</string>
+    <string name="six_button" translatable="false">6</string>
+    <string name="plus_button" translatable="false">+</string>
+    <string name="one_button" translatable="false">1</string>
+    <string name="two_button" translatable="false">2</string>
+    <string name="three_button" translatable="false">3</string>
+    <string name="minus_button" translatable="false">-</string>
+    <string name="negative_positive_button" translatable="false">-/+</string>
+    <string name="zero_button" translatable="false">0</string>
+    <string name="dot_button" translatable="false">.</string>
+    <string name="equal_button" translatable="false">=</string>
     <string name="chooseTextView">Choose an activity</string>
     <string name="standardCalcTextView">Standard Calculator</string>
     <string name="vatTextView">VAT Calculator</string>
@@ -29,10 +29,14 @@
     <string name="totalTextView">Gross</string>
     <string name="PercentageSplitTextView">Percentage Split</string>
     <string name="PercentageTextView">Percent</string>
-    <string name="PercentSign">%</string>
+    <string name="PercentSign" translatable="false">%</string>
     <string name="AmountTextView">Amount</string>
     <string name="ResultTextView">Result</string>
-    <string name="CurrencySignEuroTextView">€</string>
+    <string name="CurrencySignEuroTextView" translatable="false">€</string>
     <string name="PercentageHint">> 0 and &lt; 100</string>
     <string name="AmountHint">% applies to this</string>
+    <string name="ToastDivideByZero">You cannot divide by 0!</string>
+    <string name="ToastCompleteVatRateFirst">Set a VAT rate first!</string>
+    <string name="ToastAlertVatRateOver100">The value must be less than 100</string>
+    <string name="ToastAlertFirstNumIsZeroSecondIsNum">Illegal value format!</string>
 </resources>

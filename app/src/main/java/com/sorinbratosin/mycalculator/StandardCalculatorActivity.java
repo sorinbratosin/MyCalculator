@@ -193,7 +193,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
     private void alertDividedByZero() {
         dividedByZero = true;
         Context context = getApplicationContext();
-        CharSequence text = "You cannot divide by 0!";
+        CharSequence text = getResources().getString(R.string.ToastDivideByZero);
         int duration = Toast.LENGTH_LONG;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();

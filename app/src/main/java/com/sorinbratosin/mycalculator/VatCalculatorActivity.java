@@ -259,7 +259,7 @@ public class VatCalculatorActivity extends AppCompatActivity {
 
     //if VatRate is empty and in the other EditTexts the user types a number, then call this method that shows a toast, sets focus to VatRate and clears whatever the user typed
     private void alertCompleteVatRate() {
-        Toast toast = Toast.makeText(getApplicationContext(), "Set a VAT rate first!", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.ToastCompleteVatRateFirst),Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
         VatRate.requestFocus();
@@ -276,7 +276,7 @@ public class VatCalculatorActivity extends AppCompatActivity {
 
     //clears everything and shows a Toast when the user enters a VatRate of 100 or over
     private void alertVatRateOver100() {
-        Toast toast = Toast.makeText(getApplicationContext(), "The value must be less than 100", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.ToastAlertVatRateOver100), Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
         VatRate.requestFocus();
@@ -286,7 +286,7 @@ public class VatCalculatorActivity extends AppCompatActivity {
 
     //clears everything and shows a Toast when the user enters the first number 0 and the second another number
     private void alertFirstNumIsZeroSecondIsNumber() {
-        Toast toast = Toast.makeText(getApplicationContext(), "Illegal value format!", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.ToastAlertFirstNumIsZeroSecondIsNum), Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
         VatRate.requestFocus();

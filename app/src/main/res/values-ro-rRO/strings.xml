@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CalculatorulMeu</string>
+    <string name="chooseTextView">Alegeți o activitate</string>
+    <string name="standardCalcTextView">Calculator Standard</string>
+    <string name="vatTextView">Calculator TVA</string>
+    <string name="vatRateTextView">Cotă TVA</string>
+    <string name="amountWithoutVatTextView">Net</string>
+    <string name="vatTextView2">TVA</string>
+    <string name="totalTextView">Brut</string>
+    <string name="percentageSplitTextView">Divizare procentuală</string>
+    <string name="PercentageSplitTextView">Divizare procentuală</string>
+    <string name="PercentageTextView">Procent</string>
+    <string name="AmountTextView">Suma</string>
+    <string name="ResultTextView">Rezultat</string>
+    <string name="PercentageHint">> 0 și &lt; 100</string>
+    <string name="AmountHint">% se aplică aici</string>
+    <string name="ToastDivideByZero">Nu poți împărți la 0!</string>
+    <string name="ToastCompleteVatRateFirst">Setează o cotă de TVA!</string>
+    <string name="ToastAlertVatRateOver100">Valoarea trebuie să fie mai mică de 100</string>
+    <string name="ToastAlertFirstNumIsZeroSecondIsNum">Formatul valorii neacceptat!</string>
+</resources>
