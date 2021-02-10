@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
@@ -323,9 +322,11 @@ public class StandardCalculatorActivity extends AppCompatActivity {
     private void calculateForEqual(List<String> list) {
         displayForCalculate = TextUtils.join("", list);
         calculate();
-        historyDisplay = TextUtils.join("", list);
-        list.set(0, result);
-        operatorAlreadyPressedCount = 0;
+        if(!dividedByZero) {
+            historyDisplay = TextUtils.join("", list);
+            list.set(0, result);
+            operatorAlreadyPressedCount = 0;
+        }
     }
 
     //method called when pressing the C button or when dividing by 0, resetting the calculator to the default state

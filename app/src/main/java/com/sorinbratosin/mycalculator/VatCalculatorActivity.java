@@ -74,8 +74,8 @@ public class VatCalculatorActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
-                    checkAmountWithoutVat();
                     if (AmountWithoutVat.isFocused()) {
+                        checkAmountWithoutVat();
                         calculateUsingAmountWithoutVat();
                     }
                 } catch (IllegalValueFormatException illegalValueFormatException) {
@@ -96,8 +96,8 @@ public class VatCalculatorActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
-                    checkVat();
                     if (Vat.isFocused()) {
+                        checkVat();
                         calculateUsingVat();
                     }
                 } catch (IllegalValueFormatException illegalValueFormatException) {
@@ -118,8 +118,8 @@ public class VatCalculatorActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
-                    checkTotal();
                     if (Total.isFocused()) {
+                        checkTotal();
                         calculateUsingTotal();
                     }
                 } catch (IllegalValueFormatException illegalValueFormatException) {
