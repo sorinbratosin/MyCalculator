@@ -30,7 +30,7 @@ shows the number from before pressing the operator */
 //resultReturned - is true when StandardCalculator returns a result so that displayTextView can show it
 //firstPress - is true by default so that display can replace the 0 with the number pressed (is set to false afterwards)
 //firstCycle - is true by default so that at first displayForCalculate can get the operator, afterwards it only needs the second operand, as the first operand is the result and the operator gets set when displaying the result
-//operatorAlreadyPressedCount - helps checkIfOperatorWasAlreadyPressed() method to check if the operator was pressed more than once consecutively so that it can set boolean operatorAlreadyPressed to true
+//operatorPressedCounter - helps checkIfOperatorWasAlreadyPressed() method to check if the operator was pressed more than once consecutively so that it can set boolean operatorAlreadyPressed to true
 //lastIndexOperator - is true if the last index of a list is an operator, and false otherwise
 //calculatedWithEqual - is true after equal button is pressed and a calculation is performed
 
@@ -40,15 +40,16 @@ public class StandardCalculatorActivity extends AppCompatActivity {
     private HorizontalScrollView scrollView;
     private TextView displayTextView, historyDisplayTextView;
     private String display, historyDisplay, displayForCalculate, result;
-    private boolean dividedByZero, operatorAlreadyPressed, operatorPressed, resultReturned, dotLastIndex, lastIndexOperator,calculatedWithEqual;
+    private boolean dividedByZero, operatorAlreadyPressed, operatorPressed, resultReturned, dotLastIndex, lastIndexOperator, calculatedWithEqual;
     private boolean firstPress = true;
     private boolean firstCycle = true;
-    private int operatorAlreadyPressedCount;
+    private int operatorPressedCounter;
     private static final String ADD = "+";
     private static final String SUBTRACT = "-";
     private static final String MULTIPLY = "*";
     private static final String DIVIDE = "÷";
     private static final String DOT = ".";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,22 +79,10 @@ public class StandardCalculatorActivity extends AppCompatActivity {
                 clear();
                 break;
             case "⌫":
-                if (!display.equals("0") && display.length() > 1) {
-                    checkBackspace();
-                } else {
-                    display = "0";
-                    operatorAlreadyPressed = true;
-                }
+                backspaceButtonAction();
                 break;
             case "=":
-                try {
-                    checkDisplayLastIndex();
-                    if (!dotLastIndex) {
-                        setAndCheckCalculateForEqual();
-                    }
-                } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-                    alertCalculateWithASingleNumber();
-                }
+                equalButtonAction();
                 break;
             case "-/+":
                 checkIfPositiveOrNegative();
@@ -131,14 +120,16 @@ public class StandardCalculatorActivity extends AppCompatActivity {
                     //after an operator was pressed(operatorPressed = true), display gets replaced by the number pressed
                 } else if (display.equals("0") || firstPress) {
                     display = data;
+                    operatorPressed = false;
                     operatorAlreadyPressed = false;
-                    operatorAlreadyPressedCount = 0;
+                    operatorPressedCounter = 0;
                     firstPress = false;
                     resultReturned = false;
                 } else if (operatorPressed) {
                     display = data;
                     operatorPressed = false;
-                    operatorAlreadyPressedCount = 0;
+                    operatorAlreadyPressed = false;
+                    operatorPressedCounter = 0;
                     resultReturned = false;
                 } else if (calculatedWithEqual) {
                     display = data;
@@ -146,7 +137,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
                     displayForCalculate = "";
                     result = "";
                     operatorPressed = false;
-                    operatorAlreadyPressedCount = 0;
+                    operatorPressedCounter = 0;
                     operatorAlreadyPressed = false;
                     firstCycle = true;
                     resultReturned = false;
@@ -154,7 +145,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
                 } else {
                     display += data;
                     operatorAlreadyPressed = false;
-                    operatorAlreadyPressedCount = 0;
+                    operatorPressedCounter = 0;
                     resultReturned = false;
                 }
         }
@@ -178,6 +169,27 @@ public class StandardCalculatorActivity extends AppCompatActivity {
     }
     //end of setting the Text
 
+    private void equalButtonAction() {
+        try {
+            checkDisplayLastIndex();
+            if (!dotLastIndex) {
+                setAndCheckCalculateForEqual();
+            }
+        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+            alertCalculateWithASingleNumber();
+        }
+    }
+
+
+    private void backspaceButtonAction() {
+        if (!display.equals("0") && display.length() > 1) {
+            checkBackspace();
+        } else {
+            display = "0";
+            operatorAlreadyPressed = true;
+        }
+    }
+
 
     //create a StandardCalculator object that checks if displayForCalculate is ready to be calculated and returns the result if it's true. Wrapped in a try catch if divided by 0
     private void calculate() {
@@ -195,7 +207,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
 
     //method that gets called when the +/- button is clicked. If the number from display is positive makes it negative and vice versa
     private void checkIfPositiveOrNegative() {
-        if(!display.equals("0") && !calculatedWithEqual && !operatorPressed) {
+        if (!display.equals("0") && !calculatedWithEqual && !operatorPressed) {
             if (display.startsWith(SUBTRACT)) {
                 display = display.substring(1);
             } else {
@@ -215,17 +227,14 @@ public class StandardCalculatorActivity extends AppCompatActivity {
         clear();
     }
 
-    private void checkIfOperatorWasAlreadyPressed() {
-        if (operatorAlreadyPressedCount > 1) {
-            operatorAlreadyPressed = true;
-        }
-    }
 
     //method called when an operator is pressed
     private void checkOperatorPressed() {
-        operatorAlreadyPressedCount++;
+        operatorPressedCounter++;
         operatorPressed = true;
-        checkIfOperatorWasAlreadyPressed();
+        if (operatorPressedCounter > 1) {
+            operatorAlreadyPressed = true;
+        }
     }
 
     private void checkBackspace() {
@@ -237,14 +246,14 @@ public class StandardCalculatorActivity extends AppCompatActivity {
 
     //check if the dot button was already pressed in display to restrict from displaying again if it already had
     private void checkDot() {
-        if(!display.contains(DOT) && !resultReturned) {
+        if (!display.contains(DOT) && !resultReturned) {
             display += DOT;
         }
         firstPress = false;
     }
 
     private void checkDisplayLastIndex() {
-        if(display.length() > 0 && display.endsWith(DOT)) {
+        if (display.length() > 0 && display.endsWith(DOT)) {
             dotLastIndex = true;
         } else {
             dotLastIndex = false;
@@ -252,7 +261,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
     }
 
     private void checkDisplayForCalculateLastIndex(String data) {
-         if (!data.equals("⌫") && !data.equals("=") && !data.equals(DOT) && !data.equals("-/+")) {
+        if (!data.equals("⌫") && !data.equals("=") && !data.equals(DOT) && !data.equals("-/+") && !displayForCalculate.endsWith(ADD) && !displayForCalculate.endsWith(SUBTRACT) && !displayForCalculate.endsWith(MULTIPLY) && !displayForCalculate.endsWith(DIVIDE)) {
             displayForCalculate += data;
         }
     }
@@ -311,10 +320,10 @@ public class StandardCalculatorActivity extends AppCompatActivity {
     private void calculateForEqual(List<String> list) {
         displayForCalculate = TextUtils.join("", list);
         calculate();
-        if(!dividedByZero) {
+        if (!dividedByZero) {
             historyDisplay = TextUtils.join("", list);
             list.set(0, result);
-            operatorAlreadyPressedCount = 0;
+            operatorPressedCounter = 0;
         }
         calculatedWithEqual = true;
     }
@@ -325,7 +334,7 @@ public class StandardCalculatorActivity extends AppCompatActivity {
         historyDisplay = "";
         displayForCalculate = "";
         result = "";
-        operatorAlreadyPressedCount = 0;
+        operatorPressedCounter = 0;
         firstPress = true;
         operatorAlreadyPressed = false;
         operatorPressed = false;
@@ -337,10 +346,10 @@ public class StandardCalculatorActivity extends AppCompatActivity {
 
     //method called when pressing the operator more than one time, replacing the last operator from history display with the one pressed
     private void replaceOperator(String operator) {
-        historyDisplay = historyDisplay.substring(0, historyDisplay.length()-1) + operator;
-        displayForCalculate = displayForCalculate.substring(0, displayForCalculate.length()-1) + operator;
+        historyDisplay = historyDisplay.substring(0, historyDisplay.length() - 1) + operator;
+        displayForCalculate = displayForCalculate.substring(0, displayForCalculate.length() - 1) + operator;
         operatorAlreadyPressed = false;
-        operatorAlreadyPressedCount = 1;
+        operatorPressedCounter = 1;
     }
 
     private void alertCalculateWithASingleNumber() {
