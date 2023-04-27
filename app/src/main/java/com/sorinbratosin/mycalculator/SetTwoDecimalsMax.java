@@ -16,6 +16,9 @@ class SetTwoDecimalsMax {
     private void checkIfDecimalNeeded(BigDecimal bd) {
         bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
         DecimalFormat df = new DecimalFormat();
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
         df.setMaximumFractionDigits(2);
         df.setMinimumFractionDigits(0);
         df.setGroupingUsed(false);
